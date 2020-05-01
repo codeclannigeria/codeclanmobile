@@ -1,6 +1,6 @@
 # codeclanmobile
 
-A new Flutter project.
+![Flutter CI](https://github.com/codeclannigeria/codeclanmobile/workflows/Flutter%20CI/badge.svg)
 
 ## Getting Started
 
