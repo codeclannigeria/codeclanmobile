@@ -1,3 +1,4 @@
+import 'package:codeclanmobile/screens/courses/course_details.dart';
 import 'package:codeclanmobile/screens/home/home.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: CourseDetailsScreen(),
     );
   }
 }
