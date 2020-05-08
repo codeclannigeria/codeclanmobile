@@ -5,11 +5,17 @@ const kTextColor = Color(0xFF0D1333);
 const kBlueColor = Color(0xFF6E8AFA);
 const kBestSellerColor = Color(0xFFFFD073);
 const kGreenColor = Color(0xFF49CC96);
+const kPinkColor = Color(0xFF500270);
 
 // My Text Styles
 const kHeadingextStyle = TextStyle(
   fontSize: 28,
   color: kTextColor,
+  fontWeight: FontWeight.bold,
+);
+const kcHeadingTextStyle = TextStyle(
+  fontSize: 28,
+  color: Colors.white,
   fontWeight: FontWeight.bold,
 );
 const kSubheadingextStyle = TextStyle(
