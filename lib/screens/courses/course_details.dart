@@ -331,15 +331,17 @@ class CourseContent extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Container(
-            margin: EdgeInsets.only(left: 20),
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: kGreenColor.withOpacity(isDone ? 1 : .5),
+          Expanded(
+                      child: Container(
+              margin: EdgeInsets.only(left: 20),
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: kGreenColor.withOpacity(isDone ? 1 : .5),
+              ),
+              child: Icon(Icons.play_arrow, color: Colors.white),
             ),
-            child: Icon(Icons.play_arrow, color: Colors.white),
           )
         ],
       ),
