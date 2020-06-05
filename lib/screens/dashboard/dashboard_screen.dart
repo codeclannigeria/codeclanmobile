@@ -1,4 +1,5 @@
 import 'package:codeclanmobile/screens/dashboard/dashboard_view.dart';
+import 'package:codeclanmobile/screens/tasks/task_view.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -14,7 +15,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final List<Widget> _children = [
     DashboardView(),
-    Container(),
+    TaskView(),
     Container(),
     Container()
   ];

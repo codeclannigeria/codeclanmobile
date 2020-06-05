@@ -158,7 +158,7 @@ Widget menuCard(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 10))),
                       radius: 10,
-                      backgroundColor: Color(0xFFF6609A))
+                      backgroundColor: Color(0xFFFF8875))
             ],
           ),
           SpaceH24(),
