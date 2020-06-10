@@ -1,3 +1,4 @@
+import 'package:codeclanmobile/screens/tasks/submit_task_view.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,8 @@ class TaskView extends StatelessWidget {
               Expanded(
                 child: ListView.separated(
                     itemBuilder: (BuildContext context, int index) {
-                      return taskItem(heightOfScreen, widthOfScreen, index+1);
+                      return taskItem(
+                          heightOfScreen, widthOfScreen, index + 1, context);
                     },
                     separatorBuilder: (BuildContext context, int index) {
                       return SpaceH16();
@@ -47,7 +49,8 @@ class TaskView extends StatelessWidget {
   }
 }
 
-Widget taskItem(heightOfScreen, widthOfScreen, int index) {
+Widget taskItem(
+    heightOfScreen, widthOfScreen, int index, BuildContext context) {
   return Container(
     margin: const EdgeInsets.only(bottom: 6.0),
     height: heightOfScreen * 0.27,
@@ -121,20 +124,26 @@ Widget taskItem(heightOfScreen, widthOfScreen, int index) {
                   ),
                 ],
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2),
-                  color: Color(0xFFFF8875),
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SubmitTaskView()),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    'Submit task',
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12)),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: Color(0xFFFF8875),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      'Submit task',
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12)),
+                    ),
                   ),
                 ),
               )
