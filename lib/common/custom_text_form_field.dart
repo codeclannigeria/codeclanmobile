@@ -29,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   final double height;
   final EdgeInsetsGeometry contentPadding;
   final EdgeInsetsGeometry textFormFieldMargin;
+  final int maxlines;
 
   CustomTextFormField({
     this.prefixIcon,
@@ -56,7 +57,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.width,
-    this.height,
+    this.height, this.maxlines = 1,
   });
 
   @override
@@ -81,6 +82,7 @@ class CustomTextFormField extends StatelessWidget {
             keyboardType: textInputType,
             onChanged: onChanged,
             validator: validator,
+            maxLines: maxlines,
             inputFormatters: inputFormatters,
             decoration: InputDecoration(
               filled: true,

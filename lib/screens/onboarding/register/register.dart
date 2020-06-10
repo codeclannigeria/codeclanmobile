@@ -1,7 +1,9 @@
 import 'package:codeclanmobile/common/custom_button.dart';
 import 'package:codeclanmobile/common/custom_text_form_field.dart';
+import 'package:codeclanmobile/screens/onboarding/login/login_screen.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,9 +16,12 @@ class RegisterScreen extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          leading: Icon(
-            Feather.chevron_left,
-            color: Colors.black,
+          leading: InkWell(
+            onTap: () => Navigator.of(context).pop(),
+                      child: Icon(
+              Feather.chevron_left,
+              color: Colors.black,
+            ),
           )),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -141,6 +146,14 @@ class RegisterScreen extends StatelessWidget {
                         color: Color(0xFF666666), fontWeight: FontWeight.w400, fontSize: 12)),
                 children: <TextSpan>[
                   TextSpan(
+                    recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                          );
+                        },
                       text: 'Sign in',
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
