@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                 Text("Category", style: kTitleTextStyle),
                 Text(
                   "See All",
-                  style: kSubtitleTextSyule.copyWith(color: kBlueColor),
+                  style: kSubtitleTextSyule.copyWith(color: kPinkColor),
                 ),
               ],
             ),
