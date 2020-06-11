@@ -6,3 +6,4 @@ var kTitleTextStyle = GoogleFonts.poppins( textStyle: TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 ));
+
