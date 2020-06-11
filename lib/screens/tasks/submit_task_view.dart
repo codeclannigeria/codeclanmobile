@@ -1,5 +1,6 @@
 import 'package:codeclanmobile/common/custom_button.dart';
 import 'package:codeclanmobile/common/custom_text_form_field.dart';
+import 'package:codeclanmobile/screens/tasks/task_success_view.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +133,10 @@ class SubmitTaskView extends StatelessWidget {
                     ])),
                     borderRadius: 3,
                     color: Color(0xFFAC57B8),
-                    onPressed: () => {},
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SuccessTaskView()),
+                    ),
                     textStyle: GoogleFonts.poppins(
                         textStyle: TextStyle(color: Colors.white)),
                   ),
