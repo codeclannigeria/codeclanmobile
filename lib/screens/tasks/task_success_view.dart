@@ -1,5 +1,6 @@
 import 'package:codeclanmobile/screens/tasks/task_view.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
+import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -15,27 +16,36 @@ class SuccessTaskView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            
             Center(
-              child: Text('Task Completed!',
+                child: Container(
+                  height: 300,
+                  child: Lottie.asset(
+                      'assets/interactions/success_interaction.json'),
+                )),
+            Center(
+              child: Text('Hurray!\nYou\'ve submitted the task',
+              textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 25))),
+                          fontSize: 18))),
             ),
-            Center(
-                child: Lottie.asset(
-                    'assets/interactions/success_interaction.json')),
             SpaceH30(),
             ButtonBar(children: <Widget>[
               FlatButton(
                 child: Row(
                   children: <Widget>[
-                    Text('Back to Tasks'),
                     Icon(
-                      FlutterIcons.arrow_right_bold_circle_mco,
-                        color: Colors.black,
+                      FlutterIcons.arrow_left_bold_circle_mco,
+                        color: AppColors.buttonShade1,
                     ),
+                    Text('Back to Tasks', style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12))),
+                    
                   ],
                 ),
                 textColor: Color(0xFFAC57B8),
