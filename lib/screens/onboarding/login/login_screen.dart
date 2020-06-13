@@ -97,8 +97,8 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                  FlatButton (
-                    onPressed: ()=> Navigator.push(
+                  GestureDetector (
+                    onTap: ()=> Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ForgetpasswordScreen()),
                   ),
