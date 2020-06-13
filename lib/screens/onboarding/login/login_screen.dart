@@ -97,19 +97,17 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                  GestureDetector (
-                    onTap: ()=> Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ForgetpasswordScreen()),
-                  ),
-                            child: Text('Forgot password?',
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ForgetpasswordScreen()),
+                    ),
+                    child: Text('Forgot password?',
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                   fontSize: 12,
                                   color: AppColors.buttonShade1,
-                                  fontWeight: FontWeight.bold),
-                                  ),
-                                  ),
+                                  fontWeight: FontWeight.bold))),
                     ),
                   ],
                 ),
