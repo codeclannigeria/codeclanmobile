@@ -56,6 +56,10 @@ class LoginScreen extends StatelessWidget {
                     borderSide: new BorderSide(color: Colors.white),
                     borderRadius: new BorderRadius.circular(5),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.white),
+                    borderRadius: new BorderRadius.circular(5),
+                  ),
                   contentPadding:
                       const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                   textInputType: TextInputType.text,
@@ -74,6 +78,10 @@ class LoginScreen extends StatelessWidget {
                 CustomTextFormField(
                   hasPrefixIcon: true,
                   focusedBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.white),
+                    borderRadius: new BorderRadius.circular(5),
+                  ),
+                  enabledBorder: OutlineInputBorder(
                     borderSide: new BorderSide(color: Colors.white),
                     borderRadius: new BorderRadius.circular(5),
                   ),
