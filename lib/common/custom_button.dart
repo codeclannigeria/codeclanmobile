@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
   final double height;
   final double elevation;
   final double borderRadius;
-  final RichText title;
+  final Widget title;
   final Color color;
   final BorderSide borderSide;
   final TextStyle textStyle;
@@ -27,16 +27,15 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: onPressed,
-      elevation: elevation,
-      minWidth: MediaQuery.of(context).size.width,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderRadius),
-        side: borderSide,
-      ),
-      height: height,
-      color: color,
-      child: title
-    );
+        onPressed: onPressed,
+        elevation: elevation,
+        minWidth: MediaQuery.of(context).size.width,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          side: borderSide,
+        ),
+        height: height,
+        color: color,
+        child: title);
   }
 }

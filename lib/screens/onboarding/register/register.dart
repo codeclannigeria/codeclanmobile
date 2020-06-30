@@ -18,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
           elevation: 0,
           leading: InkWell(
             onTap: () => Navigator.of(context).pop(),
-                      child: Icon(
+            child: Icon(
               Feather.chevron_left,
               color: Colors.black,
             ),
@@ -62,7 +62,7 @@ class RegisterScreen extends StatelessWidget {
               hintText: 'First Name',
               title: '',
             ),
-           SpaceH8(),
+            SpaceH8(),
             CustomTextFormField(
               hasPrefixIcon: true,
               focusedBorder: OutlineInputBorder(
@@ -138,31 +138,29 @@ class RegisterScreen extends StatelessWidget {
             ),
             SpaceH16(),
             Center(
-          child: RichText(
-            text: TextSpan(
-                text: 'Already created an account? ',
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        color: Color(0xFF666666), fontWeight: FontWeight.w400, fontSize: 12)),
-                children: <TextSpan>[
-                  TextSpan(
-                    recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
-                          );
-                        },
-                      text: 'Sign in',
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Color(0xFFCE74AB),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold)))
-                ]),
-          ),
-        ),
+              child: RichText(
+                text: TextSpan(
+                    text: 'Already created an account? ',
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Color(0xFF666666),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12)),
+                    children: <TextSpan>[
+                      TextSpan(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pop(context);
+                            },
+                          text: 'Sign in',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: Color(0xFFCE74AB),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold)))
+                    ]),
+              ),
+            ),
           ],
         ),
       ),

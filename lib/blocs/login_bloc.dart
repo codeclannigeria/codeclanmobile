@@ -21,14 +21,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginButtonPressed) {
-      yield LoginLoading();
+      yield LoginInProgress();
       try {
         final token = await userRepository.authenticate(
           username: event.username,
           password: event.password,
         );
 
-        authenticationBloc.add(LoggedIn(token: token));
+        authenticationBloc.add(AuthenticationLoggedIn(token: token));
         yield LoginInitial();
       } catch (error) {
         yield LoginFailure(error: error.toString());
@@ -67,7 +67,7 @@ abstract class LoginState extends Equatable {
 
 class LoginInitial extends LoginState {}
 
-class LoginLoading extends LoginState {}
+class LoginInProgress extends LoginState {}
 
 class LoginFailure extends LoginState {
   final String error;
