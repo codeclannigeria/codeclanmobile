@@ -1,6 +1,7 @@
 import 'package:codeclanmobile/common/custom_button.dart';
 import 'package:codeclanmobile/common/custom_text_form_field.dart';
 import 'package:codeclanmobile/screens/dashboard/dashboard_screen.dart';
+import 'package:codeclanmobile/screens/onboarding/password/password.dart';
 import 'package:codeclanmobile/screens/onboarding/register/register.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
@@ -104,12 +105,18 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Text('Forgot password?',
-                        style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                fontSize: 12,
-                                color: AppColors.buttonShade1,
-                                fontWeight: FontWeight.bold))),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ForgetpasswordScreen()),
+                    ),
+                    child: Text('Forgot password?',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.buttonShade1,
+                                  fontWeight: FontWeight.bold))),
+                    ),
                   ],
                 ),
                 SpaceH16(),
