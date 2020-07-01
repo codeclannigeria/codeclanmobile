@@ -53,7 +53,7 @@ Widget taskItem(
     heightOfScreen, widthOfScreen, int index, BuildContext context) {
   return Container(
     margin: const EdgeInsets.only(bottom: 6.0),
-    height: heightOfScreen * 0.27,
+    height: heightOfScreen * 0.30,
     width: widthOfScreen,
     decoration: BoxDecoration(boxShadow: [
       BoxShadow(
@@ -103,51 +103,53 @@ Widget taskItem(
             color: Color(0xFF666666).withOpacity(0.5),
           ),
           SpaceH8(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Feather.clock,
-                    color: Color(0xFF666666).withOpacity(0.5),
-                    size: 15,
-                  ),
-                  SpaceW8(),
-                  Text(
-                    '23 Aug, 2020',
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            color: Color(0xFF666666).withOpacity(0.5),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12)),
-                  ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SubmitTaskView()),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: Color(0xFFFF8875),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      'Submit task',
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Feather.clock,
+                      color: Color(0xFF666666).withOpacity(0.5),
+                      size: 15,
+                    ),
+                    SpaceW8(),
+                    Text(
+                      '23 Aug, 2020',
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF666666).withOpacity(0.5),
+                              fontWeight: FontWeight.w400,
                               fontSize: 12)),
                     ),
-                  ),
+                  ],
                 ),
-              )
-            ],
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SubmitTaskView()),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: Color(0xFFFF8875),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        'Submit task',
+                        style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12)),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),

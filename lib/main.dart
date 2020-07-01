@@ -1,5 +1,4 @@
 import 'package:codeclanmobile/screens/dashboard/dashboard_screen.dart';
-import 'package:codeclanmobile/screens/home/home.dart';
 import 'package:codeclanmobile/screens/onboarding/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import 'blocs/blocs.dart';
 import 'common/loading_indicator.dart';
 import 'repositories/repositories.dart';
 import 'screens/splash/splash_screen.dart';
+import 'services/service_locator.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -30,6 +30,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 void main() {
+  setupLocator();
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final userRepository = UserRepository();
   runApp(
@@ -51,6 +52,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         bloc: BlocProvider.of<AuthenticationBloc>(context),
         builder: (context, state) {

@@ -17,7 +17,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _LoginFormState extends State<LoginForm> {
       print('Login button hit');
       BlocProvider.of<LoginBloc>(context).add(
         LoginButtonPressed(
-          username: _usernameController.text,
+          email: _emailController.text,
           password: _passwordController.text,
         ),
       );
@@ -62,7 +62,7 @@ class _LoginFormState extends State<LoginForm> {
                           'assets/interactions/login_interaction.json'))),
               SpaceH16(),
               CustomTextFormField(
-                controller: _usernameController,
+                controller: _emailController,
                 hasPrefixIcon: true,
                 focusedBorder: OutlineInputBorder(
                   borderSide: new BorderSide(color: Colors.white),

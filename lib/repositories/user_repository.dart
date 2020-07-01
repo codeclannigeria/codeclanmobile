@@ -1,12 +1,15 @@
+import 'package:codeclanmobile/services/api/api_service.dart';
+import 'package:codeclanmobile/services/service_locator.dart';
 import 'package:flutter/material.dart';
 
 class UserRepository {
+  var apiService = serviceLocator<ApiService>();
   Future<String> authenticate({
-    @required String username,
+    @required String email,
     @required String password,
   }) async {
-    await Future.delayed(Duration(seconds: 1));
-    return 'token';
+    final String token = await apiService.login(email, password);
+    return token;
   }
 
   Future<void> deleteToken() async {
