@@ -17,26 +17,26 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
-    if (event is AppStarted) {
+    if (event is AuthenticationStarted) {
       final bool hasToken = await userRepository.hasToken();
 
       if (hasToken) {
-        yield AuthenticationAuthenticated();
+        yield AuthenticationSuccess();
       } else {
-        yield AuthenticationUnauthenticated();
+        yield AuthenticationFailure();
       }
     }
 
-    if (event is LoggedIn) {
-      yield AuthenticationLoading();
+    if (event is AuthenticationLoggedIn) {
+      yield AuthenticationInProgress();
       await userRepository.persistToken(event.token);
-      yield AuthenticationAuthenticated();
+      yield AuthenticationSuccess();
     }
 
     if (event is LoggedOut) {
-      yield AuthenticationLoading();
+      yield AuthenticationInProgress();
       await userRepository.deleteToken();
-      yield AuthenticationUnauthenticated();
+      yield AuthenticationFailure();
     }
   }
 }
@@ -50,12 +50,12 @@ abstract class AuthenticationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AppStarted extends AuthenticationEvent {}
+class AuthenticationStarted extends AuthenticationEvent {}
 
-class LoggedIn extends AuthenticationEvent {
+class AuthenticationLoggedIn extends AuthenticationEvent {
   final String token;
 
-  const LoggedIn({@required this.token});
+  const AuthenticationLoggedIn({@required this.token});
 
   @override
   List<Object> get props => [token];
@@ -66,8 +66,6 @@ class LoggedIn extends AuthenticationEvent {
 
 class LoggedOut extends AuthenticationEvent {}
 
-
-
 /// Authentication States
 /// This is used to maintain states of authentication
 abstract class AuthenticationState extends Equatable {
@@ -77,8 +75,8 @@ abstract class AuthenticationState extends Equatable {
 
 class AuthenticationUninitialized extends AuthenticationState {}
 
-class AuthenticationAuthenticated extends AuthenticationState {}
+class AuthenticationSuccess extends AuthenticationState {}
 
-class AuthenticationUnauthenticated extends AuthenticationState {}
+class AuthenticationFailure extends AuthenticationState {}
 
-class AuthenticationLoading extends AuthenticationState {}
+class AuthenticationInProgress extends AuthenticationState {}

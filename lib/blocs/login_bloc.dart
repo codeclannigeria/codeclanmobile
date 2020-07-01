@@ -21,14 +21,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginButtonPressed) {
-      yield LoginLoading();
+      yield LoginInProgress();
       try {
         final token = await userRepository.authenticate(
-          username: event.username,
+          email: event.email,
           password: event.password,
         );
 
-        authenticationBloc.add(LoggedIn(token: token));
+        authenticationBloc.add(AuthenticationLoggedIn(token: token));
         yield LoginInitial();
       } catch (error) {
         yield LoginFailure(error: error.toString());
@@ -42,20 +42,20 @@ abstract class LoginEvent extends Equatable {
 }
 
 class LoginButtonPressed extends LoginEvent {
-  final String username;
+  final String email;
   final String password;
 
   const LoginButtonPressed({
-    @required this.username,
+    @required this.email,
     @required this.password,
   });
 
   @override
-  List<Object> get props => [username, password];
+  List<Object> get props => [email, password];
 
   @override
   String toString() =>
-      'LoginButtonPressed { username: $username, password: $password }';
+      'LoginButtonPressed { username: $email, password: $password }';
 }
 
 abstract class LoginState extends Equatable {
@@ -67,7 +67,7 @@ abstract class LoginState extends Equatable {
 
 class LoginInitial extends LoginState {}
 
-class LoginLoading extends LoginState {}
+class LoginInProgress extends LoginState {}
 
 class LoginFailure extends LoginState {
   final String error;
