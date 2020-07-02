@@ -19,8 +19,8 @@ class RegisterSuccessScreen extends StatelessWidget {
               Center(
                   child: Container(
                 height: 300,
-                child: Lottie.asset(
-                    'assets/interactions/success_interaction.json'),
+                child:
+                    Lottie.asset('assets/interactions/mail-verification.json'),
               )),
               Center(
                 child: Text(

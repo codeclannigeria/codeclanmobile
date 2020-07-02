@@ -45,11 +45,6 @@ class RegisterScreen extends StatelessWidget {
                       builder: (context) => RegisterSuccessScreen());
                   Navigator.pushReplacement(context, route);
                 }
-                if (state is RegisterFailure) {
-                  Route route = MaterialPageRoute(
-                      builder: (context) => RegisterSuccessScreen());
-                  Navigator.pushReplacement(context, route);
-                }
               },
               child: RegisterForm(
                 userRepository: userRepository,
