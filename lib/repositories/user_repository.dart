@@ -1,3 +1,4 @@
+import 'package:codeclanmobile/models/register_user_dto.dart';
 import 'package:codeclanmobile/services/api/api_service.dart';
 import 'package:codeclanmobile/services/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,11 @@ class UserRepository {
   }) async {
     final String token = await apiService.login(email, password);
     return token;
+  }
+
+  Future<bool> register({@required RegisterUserDto registerUserDto}) async {
+    final res = await apiService.register(registerUserDto);
+    return res;
   }
 
   Future<void> deleteToken() async {

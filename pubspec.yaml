@@ -28,6 +28,7 @@ dependencies:
   flutter_icons: ^1.1.0
   lottie: ^0.4.0
   get_it: ^4.0.2
+  flutter_easyloading: ^1.1.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
