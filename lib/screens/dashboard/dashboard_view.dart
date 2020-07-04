@@ -31,11 +31,11 @@ class DashboardView extends StatelessWidget {
                         TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegisterScreen()),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => RegisterScreen()),
+                                // );
                               },
                             text: 'Fortune',
                             style: GoogleFonts.poppins(
@@ -91,7 +91,10 @@ class DashboardView extends StatelessWidget {
                   ],
                 ),
                 SpaceH40(),
-                Center(child: Icon(SimpleLineIcons.exclamation, size: 35, color: AppColors.blackShade1.withOpacity(0.5))),
+                Center(
+                    child: Icon(SimpleLineIcons.exclamation,
+                        size: 35,
+                        color: AppColors.blackShade1.withOpacity(0.5))),
                 SpaceH16(),
                 Center(
                   child: Text('Need to enroll to a track?',

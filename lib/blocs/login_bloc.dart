@@ -1,4 +1,5 @@
 import 'package:codeclanmobile/repositories/repositories.dart';
+import 'package:codeclanmobile/services/input_validation/login_validation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginButtonPressed) {
+      //This Validates Login Input
+      LoginValidation loginValidation = new LoginValidation(email: event.email.trim()
+                                                            ,password: event.password.trim());
+      if(!loginValidation.isEmailOrPasswordValid().isValidated) {
+         yield LoginFailure(error: loginValidation
+            .isEmailOrPasswordValid()
+            .error
+            .first);
+        return;
+      }
       yield LoginInProgress();
       try {
         final token = await userRepository.authenticate(

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ApiInterceptor extends Interceptor {
   @override
@@ -33,7 +34,6 @@ FutureOr<dynamic> onResponse(Response response) async {
   print("Response: ${response.data}");
   print("<-- END HTTP");
   // }
-
   return response;
 }
 

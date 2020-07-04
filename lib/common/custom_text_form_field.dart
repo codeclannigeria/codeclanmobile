@@ -31,37 +31,38 @@ class CustomTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry textFormFieldMargin;
   final int maxlines;
   final TextEditingController controller;
+  final Key key;
 
-  CustomTextFormField({
-    this.prefixIcon,
-    this.suffixIcon,
-    this.textStyle,
-    this.hintTextStyle,
-    this.labelStyle,
-    this.titleStyle,
-    this.titleIcon,
-    this.hasTitleIcon = false,
-    this.title,
-    this.contentPadding,
-    this.textFormFieldMargin,
-    this.hasTitle = false,
-    this.border = Borders.primaryInputBorder,
-    this.focusedBorder = Borders.focusedBorder,
-    this.enabledBorder = Borders.enabledBorder,
-    this.hintText,
-    this.labelText,
-    this.hasPrefixIcon = false,
-    this.hasSuffixIcon = false,
-    this.obscured = false,
-    this.textInputType,
-    this.onChanged,
-    this.validator,
-    this.inputFormatters,
-    this.width,
-    this.height,
-    this.maxlines = 1,
-    this.controller,
-  });
+  CustomTextFormField(
+      {this.prefixIcon,
+      this.suffixIcon,
+      this.textStyle,
+      this.hintTextStyle,
+      this.labelStyle,
+      this.titleStyle,
+      this.titleIcon,
+      this.hasTitleIcon = false,
+      this.title,
+      this.contentPadding,
+      this.textFormFieldMargin,
+      this.hasTitle = false,
+      this.border = Borders.primaryInputBorder,
+      this.focusedBorder = Borders.focusedBorder,
+      this.enabledBorder = Borders.enabledBorder,
+      this.hintText,
+      this.labelText,
+      this.hasPrefixIcon = false,
+      this.hasSuffixIcon = false,
+      this.obscured = false,
+      this.textInputType,
+      this.onChanged,
+      this.validator,
+      this.inputFormatters,
+      this.width,
+      this.height,
+      this.maxlines = 1,
+      this.controller,
+      this.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +77,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
 //        hasTitle ? SpaceH4() : Container(),
         Container(
+          key: key,
           width: width,
           height: height,
           margin: textFormFieldMargin,

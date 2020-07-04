@@ -2,6 +2,7 @@ import 'package:codeclanmobile/screens/dashboard/dashboard_screen.dart';
 import 'package:codeclanmobile/screens/onboarding/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'blocs/blocs.dart';
 import 'common/loading_indicator.dart';
@@ -51,22 +52,24 @@ class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        bloc: BlocProvider.of<AuthenticationBloc>(context),
-        builder: (context, state) {
-          if (state is AuthenticationSuccess) {
-            return DashboardScreen();
-          }
-          if (state is AuthenticationFailure) {
-            return LoginScreen(userRepository: userRepository);
-          }
-          if (state is AuthenticationInProgress) {
-            return LoadingIndicator();
-          }
-          return SplashScreen();
-        },
+    return FlutterEasyLoading(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          bloc: BlocProvider.of<AuthenticationBloc>(context),
+          builder: (context, state) {
+            if (state is AuthenticationSuccess) {
+              return DashboardScreen();
+            }
+            if (state is AuthenticationFailure) {
+              return LoginScreen(userRepository: userRepository);
+            }
+            if (state is AuthenticationInProgress) {
+              return LoadingIndicator();
+            }
+            return SplashScreen();
+          },
+        ),
       ),
     );
   }
