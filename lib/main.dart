@@ -9,6 +9,7 @@ import 'common/loading_indicator.dart';
 import 'repositories/repositories.dart';
 import 'screens/splash/splash_screen.dart';
 import 'services/service_locator.dart';
+import 'services/storage/shared_pref_service.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -30,8 +31,10 @@ class SimpleBlocDelegate extends BlocDelegate {
   }
 }
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  await StorageUtil.getInstance();
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final userRepository = UserRepository();
   runApp(

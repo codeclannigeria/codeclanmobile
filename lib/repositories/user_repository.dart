@@ -10,6 +10,7 @@ class UserRepository {
     @required String password,
   }) async {
     final String token = await apiService.login(email, password);
+
     return token;
   }
 
