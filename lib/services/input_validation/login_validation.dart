@@ -20,5 +20,10 @@ class LoginValidation{
       validationResponse.isInvalid('Password cannot be empty or spaces');
     return validationResponse;
   }
+  ValidateResponse isNameValid(password){
+    if(password.isEmpty)
+      validationResponse.isInvalid('Name cannot be empty or spaces');
+    return validationResponse;
+  }
 }
 

@@ -25,6 +25,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     _onLoginButtonPressed() {
       print('Login button hit');
+      if(_formKey.currentState.validate())
       BlocProvider.of<LoginBloc>(context).add(
         LoginButtonPressed(
           email: _emailController.text,
@@ -141,11 +142,8 @@ class _LoginFormState extends State<LoginForm> {
                         ])),
                   borderRadius: 3,
                   color: Colors.black87,
-                  onPressed:(){
-                    print(state);
-                      state is! LoginInProgress ? _onLoginButtonPressed : null;
-                    },
-
+                  onPressed:
+                      state is! LoginInProgress ? _onLoginButtonPressed : null,
                   textStyle: GoogleFonts.poppins(
                       textStyle: TextStyle(color: Colors.white)),
                 ),
