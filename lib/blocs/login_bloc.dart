@@ -22,16 +22,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginButtonPressed) {
-      //This Validates Login Input
-      LoginValidation loginValidation = new LoginValidation(email: event.email.trim()
-                                                            ,password: event.password.trim());
-      if(!loginValidation.isEmailOrPasswordValid().isValidated) {
-         yield LoginFailure(error: loginValidation
-            .isEmailOrPasswordValid()
-            .error
-            .first);
-        return;
-      }
       yield LoginInProgress();
       try {
         final token = await userRepository.authenticate(
