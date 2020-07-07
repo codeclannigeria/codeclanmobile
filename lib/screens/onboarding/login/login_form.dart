@@ -37,121 +37,121 @@ class _LoginFormState extends State<LoginForm> {
         builder: (BuildContext context, LoginState state) {
 
           return Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CustomTextFormField(
-              controller: _emailController,
-              hasPrefixIcon: true,
-              focusedBorder: OutlineInputBorder(
-                borderSide: new BorderSide(color: Colors.white),
-                borderRadius: new BorderRadius.circular(5),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: new BorderSide(color: Colors.white),
-                borderRadius: new BorderRadius.circular(5),
-              ),
-              contentPadding:
-                  const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
-              textInputType: TextInputType.text,
-              titleStyle: GoogleFonts.poppins(
-                  textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
-              hasTitle: true,
-              hintTextStyle: GoogleFonts.poppins(
-                  textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
-              //textStyle: Styles.customTextStyle(color: AppColors.white),
-              hintText: 'Email Address',
-              title: '',
-              validator: (value) {
-                //This Validates Login Input
-                LoginValidation loginValidation = new LoginValidation();
-                var validation = loginValidation.isEmailValid(value);
-                if (!validation.isValidated) {
-                  return validation.error.first;
-                }
-                return null;
-              },
-            ),
-            SpaceH8(),
-            CustomTextFormField(
-              controller: _passwordController,
-              hasPrefixIcon: true,
-              focusedBorder: OutlineInputBorder(
-                borderSide: new BorderSide(color: Colors.white),
-                borderRadius: new BorderRadius.circular(5),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: new BorderSide(color: Colors.white),
-                borderRadius: new BorderRadius.circular(5),
-              ),
-              contentPadding:
-                  const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
-              textInputType: TextInputType.text,
-              titleStyle: GoogleFonts.poppins(
-                  textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
-              hasTitle: true,
-              hintTextStyle: GoogleFonts.poppins(
-                  textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
-              //textStyle: Styles.customTextStyle(color: AppColors.white),
-              hintText: 'Password',
-              obscured: true,
-              title: '',
-              validator: (value) {
-                //This Validates Login Input
-                LoginValidation loginValidation = new LoginValidation();
-                var validation = loginValidation.isPasswordValid(value);
-                if (!validation.isValidated) {
-                  return validation.error.first;
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 70),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ForgetpasswordScreen()),
+                CustomTextFormField(
+                  controller: _emailController,
+                  hasPrefixIcon: true,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.white),
+                    borderRadius: new BorderRadius.circular(5),
                   ),
-                  child: Text('Forgot password?',
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              fontSize: 12,
-                              color: AppColors.buttonShade1,
-                              fontWeight: FontWeight.bold))),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.white),
+                    borderRadius: new BorderRadius.circular(5),
+                  ),
+                  contentPadding:
+                      const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                  textInputType: TextInputType.text,
+                  titleStyle: GoogleFonts.poppins(
+                      textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                  hasTitle: true,
+                  hintTextStyle: GoogleFonts.poppins(
+                      textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                  //textStyle: Styles.customTextStyle(color: AppColors.white),
+                  hintText: 'Email Address',
+                  title: '',
+                  validator: (value) {
+                    //This Validates Login Input
+                    LoginValidation loginValidation = new LoginValidation();
+                    var validation = loginValidation.isEmailValid(value);
+                    if (!validation.isValidated) {
+                      return validation.error.first;
+                    }
+                    return null;
+                  },
+                ),
+                SpaceH8(),
+                CustomTextFormField(
+                  controller: _passwordController,
+                  hasPrefixIcon: true,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.white),
+                    borderRadius: new BorderRadius.circular(5),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.white),
+                    borderRadius: new BorderRadius.circular(5),
+                  ),
+                  contentPadding:
+                      const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                  textInputType: TextInputType.text,
+                  titleStyle: GoogleFonts.poppins(
+                      textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                  hasTitle: true,
+                  hintTextStyle: GoogleFonts.poppins(
+                      textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                  //textStyle: Styles.customTextStyle(color: AppColors.white),
+                  hintText: 'Password',
+                  obscured: true,
+                  title: '',
+                  validator: (value) {
+                    //This Validates Login Input
+                    LoginValidation loginValidation = new LoginValidation();
+                    var validation = loginValidation.isPasswordValid(value);
+                    if (!validation.isValidated) {
+                      return validation.error.first;
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 70),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgetpasswordScreen()),
+                      ),
+                      child: Text('Forgot password?',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.buttonShade1,
+                                  fontWeight: FontWeight.bold))),
+                    ),
+                  ],
+                ),
+                SpaceH16(),
+                CustomButton(
+                  title: state is LoginInProgress
+                      ? CircularProgressIndicator()
+                      : RichText(
+                          text: TextSpan(text: 'Log me ', children: <TextSpan>[
+                          TextSpan(
+                              text: 'in',
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)))
+                        ])),
+                  borderRadius: 3,
+                  color: Colors.black87,
+                  onPressed:(){
+                    print(state);
+                      state is! LoginInProgress ? _onLoginButtonPressed : null;
+                    },
+
+                  textStyle: GoogleFonts.poppins(
+                      textStyle: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
-            SpaceH16(),
-            CustomButton(
-              title: state is LoginInProgress
-                  ? CircularProgressIndicator()
-                  : RichText(
-                      text: TextSpan(text: 'Log me ', children: <TextSpan>[
-                      TextSpan(
-                          text: 'in',
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)))
-                    ])),
-              borderRadius: 3,
-              color: Colors.black87,
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  state is! LoginInProgress ? _onLoginButtonPressed : null;
-                }
-              },
-              textStyle: GoogleFonts.poppins(
-                  textStyle: TextStyle(color: Colors.white)),
-            ),
-          ],
-        ),
-      );
+          );
     });
   }
 }
