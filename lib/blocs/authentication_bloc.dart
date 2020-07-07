@@ -1,4 +1,5 @@
 import 'package:codeclanmobile/repositories/repositories.dart';
+import 'package:codeclanmobile/services/api/models/user_dto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +20,10 @@ class AuthenticationBloc
   ) async* {
     if (event is AuthenticationStarted) {
       final bool hasToken = await userRepository.hasToken();
-
+      // final UserDto user = await userRepository.getUserProfile();
       if (hasToken) {
-        yield AuthenticationSuccess();
+        final UserDto user = await userRepository.getUserProfile();
+        yield AuthenticationSuccess(user: user);
       } else {
         yield AuthenticationFailure();
       }
@@ -29,8 +31,9 @@ class AuthenticationBloc
 
     if (event is AuthenticationLoggedIn) {
       yield AuthenticationInProgress();
+      final UserDto user = await userRepository.getUserProfile();
       await userRepository.persistToken(event.token);
-      yield AuthenticationSuccess();
+      yield AuthenticationSuccess(user: user);
     }
 
     if (event is LoggedOut) {
@@ -75,7 +78,11 @@ abstract class AuthenticationState extends Equatable {
 
 class AuthenticationUninitialized extends AuthenticationState {}
 
-class AuthenticationSuccess extends AuthenticationState {}
+class AuthenticationSuccess extends AuthenticationState {
+  final UserDto user;
+
+  AuthenticationSuccess({@required this.user});
+}
 
 class AuthenticationFailure extends AuthenticationState {}
 

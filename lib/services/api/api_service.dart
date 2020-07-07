@@ -3,8 +3,10 @@ import 'package:codeclanmobile/repositories/interceptor.dart';
 import 'package:codeclanmobile/services/api/i_api_service.dart';
 import 'package:codeclanmobile/services/api/models/api_exception.dart';
 import 'package:codeclanmobile/services/api/models/login_res_dto.dart';
+import 'package:codeclanmobile/services/api/models/user_dto.dart';
 import 'package:codeclanmobile/utils/globals.dart';
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'models/register_res_dto.dart';
 
@@ -18,6 +20,7 @@ class ApiService implements IAPIService {
         baseUrl: Globals.apiBaseUrl);
     _dio = Dio(options);
     _dio.interceptors.add(ApiInterceptor());
+    _dio.interceptors.add(PrettyDioLogger());
   }
 
   @override
@@ -52,6 +55,24 @@ class ApiService implements IAPIService {
           options: Options(headers: {"requireToken": false}));
       RegisterUserResDto result = RegisterUserResDto.fromJson(response.data);
       return result.canLogin;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        ApiException result = ApiException.fromJson(e.response.data);
+        throw result.message;
+      } else {
+        print(e.error);
+        throw e.error;
+      }
+    }
+  }
+
+  @override
+  Future<UserDto> getUserProfile() async {
+    final url = '/profile';
+    try {
+      Response response = await _dio.get(url);
+      UserDto result = UserDto.fromJson(response.data);
+      return result;
     } on DioError catch (e) {
       if (e.response != null) {
         ApiException result = ApiException.fromJson(e.response.data);

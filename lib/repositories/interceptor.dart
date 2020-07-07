@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:codeclanmobile/services/storage/shared_pref_service.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ApiInterceptor extends Interceptor {
   @override
   Future<dynamic> onRequest(RequestOptions options) async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = StorageUtil.getString('token');
+
     print(
         "--> ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"" + (options.baseUrl ?? "") + (options.path ?? "")}");
     print("Headers:");
@@ -19,7 +22,7 @@ class ApiInterceptor extends Interceptor {
     }
     print(
         "--> END ${options.method != null ? options.method.toUpperCase() : 'METHOD'}");
-    // options.headers.addAll({"Authorization": "Bearer $token"});
+    options.headers.addAll({"Authorization": "Bearer $token"});
 
     return options;
   }

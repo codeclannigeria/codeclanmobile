@@ -35,9 +35,9 @@ class _RegisterFormState extends State<RegisterForm> {
       registerUserDto.lastName = _lastNameController.text;
       registerUserDto.password = _passwordController.text;
 
-      if(_formKey.currentState.validate())
-      BlocProvider.of<RegisterBloc>(context)
-          .add(RegisterButtonPressed(registerUserDto: registerUserDto));
+      if (_formKey.currentState.validate())
+        BlocProvider.of<RegisterBloc>(context)
+            .add(RegisterButtonPressed(registerUserDto: registerUserDto));
     }
 
     return BlocBuilder<RegisterBloc, RegisterState>(
@@ -76,10 +76,12 @@ class _RegisterFormState extends State<RegisterForm> {
                     const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                 textInputType: TextInputType.text,
                 titleStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 hasTitle: true,
                 hintTextStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 //textStyle: Styles.customTextStyle(color: AppColors.white),
                 hintText: 'First Name',
                 title: '',
@@ -105,22 +107,24 @@ class _RegisterFormState extends State<RegisterForm> {
                     const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                 textInputType: TextInputType.text,
                 titleStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 hasTitle: true,
                 hintTextStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 //textStyle: Styles.customTextStyle(color: AppColors.white),
                 hintText: 'Last Name',
                 title: '',
                 validator: (value) {
-                //This Validates Login Input
-                LoginValidation loginValidation = new LoginValidation();
-                var validation = loginValidation.isNameValid(value);
-                if (!validation.isValidated) {
-                  return validation.error.first;
-                }
-                return null;
-              },
+                  //This Validates Login Input
+                  LoginValidation loginValidation = new LoginValidation();
+                  var validation = loginValidation.isNameValid(value);
+                  if (!validation.isValidated) {
+                    return validation.error.first;
+                  }
+                  return null;
+                },
               ),
               SpaceH8(),
               CustomTextFormField(
@@ -134,22 +138,24 @@ class _RegisterFormState extends State<RegisterForm> {
                     const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                 textInputType: TextInputType.text,
                 titleStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 hasTitle: true,
                 hintTextStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 //textStyle: Styles.customTextStyle(color: AppColors.white),
                 hintText: 'Email Address',
                 title: '',
                 validator: (value) {
-                //This Validates Login Input
-                LoginValidation loginValidation = new LoginValidation();
-                var validation = loginValidation.isEmailValid(value);
-                if (!validation.isValidated) {
-                  return validation.error.first;
-                }
-                return null;
-              },
+                  //This Validates Login Input
+                  LoginValidation loginValidation = new LoginValidation();
+                  var validation = loginValidation.isEmailValid(value);
+                  if (!validation.isValidated) {
+                    return validation.error.first;
+                  }
+                  return null;
+                },
               ),
               SpaceH8(),
               CustomTextFormField(
@@ -163,23 +169,25 @@ class _RegisterFormState extends State<RegisterForm> {
                     const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                 textInputType: TextInputType.text,
                 titleStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 hasTitle: true,
                 hintTextStyle: GoogleFonts.poppins(
-                    textStyle: TextStyle(color: Color(0xFF666666), fontSize: 12)),
+                    textStyle:
+                        TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 //textStyle: Styles.customTextStyle(color: AppColors.white),
                 hintText: 'Password',
                 obscured: true,
                 title: '',
                 validator: (value) {
-                //This Validates Login Input
-                LoginValidation loginValidation = new LoginValidation();
-                var validation = loginValidation.isPasswordValid(value);
-                if (!validation.isValidated) {
-                  return validation.error.first;
-                }
-                return null;
-              },
+                  //This Validates Login Input
+                  LoginValidation loginValidation = new LoginValidation();
+                  var validation = loginValidation.isPasswordValid(value);
+                  if (!validation.isValidated) {
+                    return validation.error.first;
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 70),
               CustomButton(
@@ -209,8 +217,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 borderRadius: 3,
                 color: AppColors.buttonShade1,
-                onPressed:
-                    state is! RegisterLoading ? _onRegisterButtonPressed : () {},
+                onPressed: state is! RegisterLoading
+                    ? _onRegisterButtonPressed
+                    : () {},
                 textStyle: GoogleFonts.poppins(
                     textStyle: TextStyle(color: Colors.white)),
               ),
