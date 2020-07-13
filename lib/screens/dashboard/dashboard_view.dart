@@ -1,6 +1,7 @@
 import 'package:codeclanmobile/blocs/authentication_bloc.dart';
 import 'package:codeclanmobile/common/custom_button.dart';
 import 'package:codeclanmobile/screens/onboarding/register/register.dart';
+import 'package:codeclanmobile/screens/tracks/track_screen.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/gestures.dart';
@@ -126,7 +127,11 @@ class DashboardView extends StatelessWidget {
                               ])),
                           borderRadius: 3,
                           color: AppColors.blackShade1.withOpacity(0.5),
-                          onPressed: () => {},
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TrackListScreen()),
+                          ),
                           textStyle: GoogleFonts.poppins(
                               textStyle: TextStyle(color: Colors.white)),
                         ),
