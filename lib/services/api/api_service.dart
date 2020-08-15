@@ -3,6 +3,7 @@ import 'package:codeclanmobile/repositories/interceptor.dart';
 import 'package:codeclanmobile/services/api/i_api_service.dart';
 import 'package:codeclanmobile/services/api/models/api_exception.dart';
 import 'package:codeclanmobile/services/api/models/login_res_dto.dart';
+import 'package:codeclanmobile/services/api/models/track_list_dto.dart';
 import 'package:codeclanmobile/services/api/models/user_dto.dart';
 import 'package:codeclanmobile/utils/globals.dart';
 import 'package:dio/dio.dart';
@@ -72,6 +73,24 @@ class ApiService implements IAPIService {
     try {
       Response response = await _dio.get(url);
       UserDto result = UserDto.fromJson(response.data);
+      return result;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        ApiException result = ApiException.fromJson(e.response.data);
+        throw result.message;
+      } else {
+        print(e.error);
+        throw e.error;
+      }
+    }
+  }
+
+  @override
+  Future<TrackListDto> getAllTracks() async {
+    final url = '/tracks';
+    try {
+      Response response = await _dio.get(url);
+      TrackListDto result = TrackListDto.fromJson(response.data);
       return result;
     } on DioError catch (e) {
       if (e.response != null) {
