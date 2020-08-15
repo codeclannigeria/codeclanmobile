@@ -8,9 +8,8 @@ import 'package:meta/meta.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRepository userRepository;
   RegisterBloc({@required this.userRepository})
-      : assert(userRepository != null);
-  @override
-  RegisterState get initialState => RegisterInitial();
+      : assert(userRepository != null),
+        super(RegisterInitial());
 
   @override
   Stream<RegisterState> mapEventToState(

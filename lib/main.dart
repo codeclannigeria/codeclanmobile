@@ -11,7 +11,7 @@ import 'screens/splash/splash_screen.dart';
 import 'services/service_locator.dart';
 import 'services/storage/shared_pref_service.dart';
 
-class SimpleBlocDelegate extends BlocDelegate {
+class SimpleBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object event) {
     print(event);
@@ -25,9 +25,8 @@ class SimpleBlocDelegate extends BlocDelegate {
   }
 
   @override
-  void onError(Bloc bloc, Object error, StackTrace stackTrace) {
-    print(error);
-    super.onError(bloc, error, stackTrace);
+  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
+    super.onError(cubit, error, stackTrace);
   }
 }
 
@@ -35,7 +34,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   await StorageUtil.getInstance();
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  Bloc.observer = SimpleBlocObserver();
   final userRepository = UserRepository();
   runApp(
     BlocProvider<AuthenticationBloc>(
@@ -59,7 +58,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          bloc: BlocProvider.of<AuthenticationBloc>(context),
+          cubit: BlocProvider.of<AuthenticationBloc>(context),
           builder: (context, state) {
             if (state is AuthenticationSuccess) {
               return DashboardScreen();

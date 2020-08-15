@@ -1,5 +1,4 @@
 import 'package:codeclanmobile/repositories/repositories.dart';
-import 'package:codeclanmobile/services/input_validation/login_validation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +13,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     @required this.userRepository,
     @required this.authenticationBloc,
   })  : assert(userRepository != null),
-        assert(authenticationBloc != null);
-
-  @override
-  LoginState get initialState => LoginInitial();
+        assert(authenticationBloc != null),
+        super(LoginInitial());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
