@@ -30,7 +30,7 @@ class Items {
   String createdAt;
   String title;
   String description;
-  Null thumbnailUrl;
+  dynamic thumbnailUrl;
 
   Items(
       {this.id,

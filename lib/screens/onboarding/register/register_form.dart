@@ -31,7 +31,7 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget build(BuildContext context) {
     _onRegisterButtonPressed() {
       RegisterUserDto registerUserDto = new RegisterUserDto();
-      registerUserDto.email = _emailController.text;
+      registerUserDto.email = _emailController.text.trim();
       registerUserDto.firstName = _firstNameController.text;
       registerUserDto.lastName = _lastNameController.text;
       registerUserDto.password = _passwordController.text;

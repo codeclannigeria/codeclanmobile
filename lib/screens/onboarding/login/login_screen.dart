@@ -1,5 +1,6 @@
 import 'package:codeclanmobile/blocs/blocs.dart';
 import 'package:codeclanmobile/blocs/login_bloc.dart';
+import 'package:codeclanmobile/common/snack_bar.dart';
 import 'package:codeclanmobile/repositories/user_repository.dart';
 import 'package:codeclanmobile/screens/onboarding/login/login_form.dart';
 import 'package:codeclanmobile/screens/onboarding/register/register.dart';
@@ -38,12 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
             child: BlocListener<LoginBloc, LoginState>(
                 listener: (BuildContext context, LoginState state) {
                   if (state is LoginFailure) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('${state.error}'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
+                    CodeClanSnackBar.showErrorSnackBar(context,
+                        message: state.error);
                   }
                 },
                 child: SafeArea(

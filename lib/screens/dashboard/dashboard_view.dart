@@ -10,7 +10,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DashboardView extends StatelessWidget {
+class DashboardView extends StatefulWidget {
+  @override
+  _DashboardViewState createState() => _DashboardViewState();
+}
+
+class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +66,8 @@ class DashboardView extends StatelessWidget {
                                   Feather.user,
                                   'Assigned\nmentor',
                                   'Get hands on coding help',
-                                  '1')),
+                                  '1',
+                                  null)),
                           SpaceW16(),
                           Expanded(
                               child: menuCard(
@@ -70,7 +76,8 @@ class DashboardView extends StatelessWidget {
                                   Feather.file,
                                   'Pending\ntasks',
                                   'Move to the next stage',
-                                  '2'))
+                                  '2',
+                                  null))
                         ],
                       ),
                       SpaceH20(),
@@ -83,6 +90,7 @@ class DashboardView extends StatelessWidget {
                                 Feather.trending_up,
                                 'Current\nstage',
                                 'See your progress',
+                                null,
                                 null),
                           ),
                           SpaceW16(),
@@ -93,7 +101,12 @@ class DashboardView extends StatelessWidget {
                                   Feather.award,
                                   'My\ntracks',
                                   'Your enrolled tracks',
-                                  '1'))
+                                  '${state.user.tracks.length}',
+                                  () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TrackListScreen()))))
                         ],
                       ),
                       SpaceH40(),
@@ -149,52 +162,55 @@ class DashboardView extends StatelessWidget {
   }
 }
 
-Widget menuCard(
-    Color color, Color iconColor, icon, title, description, String count) {
-  return Container(
-    height: 200,
-    color: color,
-    child: Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SpaceH12(),
-          Row(
-            children: <Widget>[
-              Icon(
-                icon,
-                color: iconColor,
-              ),
-              SpaceW8(),
-              count == null
-                  ? Container()
-                  : CircleAvatar(
-                      child: Text(count,
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 10))),
-                      radius: 10,
-                      backgroundColor: Color(0xFFFF8875))
-            ],
-          ),
-          SpaceH24(),
-          Text(title,
-              style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: Color(0xFF666666),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15))),
-          SpaceH8(),
-          Text(description,
-              style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: Color(0xFF666666),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 10))),
-        ],
+Widget menuCard(Color color, Color iconColor, icon, title, description,
+    String count, Function ontap) {
+  return GestureDetector(
+    onTap: ontap,
+    child: Container(
+      height: 200,
+      color: color,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SpaceH12(),
+            Row(
+              children: <Widget>[
+                Icon(
+                  icon,
+                  color: iconColor,
+                ),
+                SpaceW8(),
+                count == null
+                    ? Container()
+                    : CircleAvatar(
+                        child: Text(count,
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 10))),
+                        radius: 10,
+                        backgroundColor: Color(0xFFFF8875))
+              ],
+            ),
+            SpaceH24(),
+            Text(title,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Color(0xFF666666),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15))),
+            SpaceH8(),
+            Text(description,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Color(0xFF666666),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 10))),
+          ],
+        ),
       ),
     ),
   );
