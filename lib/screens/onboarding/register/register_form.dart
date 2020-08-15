@@ -26,6 +26,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _showPassword = true;
   @override
   Widget build(BuildContext context) {
     _onRegisterButtonPressed() {
@@ -177,8 +178,19 @@ class _RegisterFormState extends State<RegisterForm> {
                         TextStyle(color: Color(0xFF666666), fontSize: 12)),
                 //textStyle: Styles.customTextStyle(color: AppColors.white),
                 hintText: 'Password',
-                obscured: true,
+                obscured: _showPassword,
                 title: '',
+                hasSuffixIcon: true,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _showPassword = !_showPassword;
+                    });
+                  },
+                  child: Icon(
+                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey),
+                ),
                 validator: (value) {
                   //This Validates Login Input
                   LoginValidation loginValidation = new LoginValidation();
