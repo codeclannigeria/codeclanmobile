@@ -17,8 +17,8 @@ class TrackItem extends StatefulWidget {
 }
 
 class _TrackItemState extends State<TrackItem> {
-  static List<Color> gradientRed = [Color(0xFF12CDFE), Color(0xFF038BF4)];
-  static List<Color> gradientBlue = [Color(0xFFFF7698), Color(0xFFFE1952)];
+  static List<Color> gradientBlue = [Color(0xFF12CDFE), Color(0xFF038BF4)];
+  static List<Color> gradientRed = [Color(0xFFFF7698), Color(0xFFFE1952)];
 
   final gradientListColors = [gradientBlue, gradientRed];
   final _random = new Random();

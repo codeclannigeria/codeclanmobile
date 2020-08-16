@@ -25,15 +25,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
       _currentIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
           selectedFontSize: 12,
           unselectedFontSize: 12,
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xFF3E3F62),
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppColors.buttonShade1,
+          selectedItemColor: Color(0xFFFF7698),
           unselectedItemColor: Color(0xFF999999),
           unselectedLabelStyle: GoogleFonts.poppins(
               textStyle: GoogleFonts.poppins(
@@ -46,31 +47,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
               textStyle: GoogleFonts.poppins(
             textStyle: TextStyle(
                 fontSize: 12,
-                color: Color(0xFFE02E64),
+                color: Color(0xFFFE1952),
                 fontWeight: FontWeight.w500),
           )),
           currentIndex: _currentIndex,
           onTap: _onBottomNavBarTab,
           items: [
             BottomNavigationBarItem(
-              activeIcon: Icon(Feather.home, color: AppColors.buttonShade1),
+              activeIcon: Icon(Feather.home, color: Color(0xFFFF7698)),
               icon: Icon(Feather.home, color: Color(0xFF999999)),
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              activeIcon: Icon(Feather.file, color: AppColors.buttonShade1),
+              activeIcon: Icon(Feather.file, color: Color(0xFFFF7698)),
               icon: Icon(Feather.file, color: Color(0xFF999999)),
               title: Text('Tasks'),
             ),
             BottomNavigationBarItem(
-              activeIcon: Icon(Feather.airplay, color: AppColors.buttonShade1),
+              activeIcon: Icon(Feather.airplay, color: Color(0xFFFF7698)),
               icon: Icon(Feather.airplay, color: Color(0xFF999999)),
               title: Text(
                 'Courses',
               ),
             ),
             BottomNavigationBarItem(
-              activeIcon: Icon(Feather.user, color: AppColors.buttonShade1),
+              activeIcon: Icon(Feather.user, color: Color(0xFFFF7698)),
               icon: Icon(
                 Feather.user,
                 color: Color(0xFF999999),
@@ -79,7 +80,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             )
           ],
         ),
-       body:  _children[_currentIndex]
-    );
+        body: _children[_currentIndex]);
   }
 }
