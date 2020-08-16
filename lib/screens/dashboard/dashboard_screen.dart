@@ -1,3 +1,4 @@
+import 'package:codeclanmobile/screens/courses/courses_view.dart';
 import 'package:codeclanmobile/screens/dashboard/dashboard_view.dart';
 import 'package:codeclanmobile/screens/tasks/task_view.dart';
 import 'package:codeclanmobile/values/values.dart';
@@ -16,7 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<Widget> _children = [
     DashboardView(),
     TaskView(),
-    Container(),
+    CoursesView(),
     Container()
   ];
 
