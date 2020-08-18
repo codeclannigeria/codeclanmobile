@@ -1,5 +1,7 @@
 import 'package:codeclanmobile/constants/constants.dart';
+import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CourseDetailsScreen extends StatefulWidget {
@@ -14,7 +16,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 3);
+    _tabController = TabController(vsync: this, length: 2);
   }
 
   @override
@@ -25,7 +27,11 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
         decoration: BoxDecoration(
             // color: Color(0xFFF5F4EF),
             gradient: LinearGradient(
-          colors: [Color(0xFFbd005f), Color(0xFF500270)],
+          colors: [
+            AppColors.backgroundShade1,
+            AppColors.backgroundShade2,
+            AppColors.backgroundShade3,
+          ],
           begin: Alignment.center,
           end: new Alignment(-1.0, -1.0),
         )
@@ -42,22 +48,18 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SvgPicture.asset(
-                        "assets/icons/arrow-left.svg",
-                        color: Colors.white,
-                      ),
-                      SvgPicture.asset("assets/icons/more-vertical.svg",
-                          color: Colors.white),
-                    ],
+                  InkWell(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Icon(
+                      FlutterIcons.arrow_left_sli,
+                      color: Colors.white,
+                    ),
                   ),
                   SizedBox(height: 30),
                   ClipPath(
                     clipper: BestSellerClipper(),
                     child: Container(
-                      color: kBestSellerColor,
+                      color: AppColors.alternateShade3,
                       padding: EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
                       child: Text(
@@ -73,44 +75,44 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
                   SizedBox(height: 16),
                   Row(
                     children: <Widget>[
-                      SvgPicture.asset("assets/icons/person.svg",
-                          color: Colors.white),
-                      SizedBox(width: 5),
-                      Text(
-                        "18K",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(width: 20),
-                      SvgPicture.asset(
-                        "assets/icons/star.svg",
-                        color: Color(0xFFfe8904),
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        "4.8",
-                        style: TextStyle(color: Colors.white),
-                      )
+                      // SvgPicture.asset("assets/icons/person.svg",
+                      //     color: Colors.white),
+                      // SizedBox(width: 5),
+                      // Text(
+                      //   "18K",
+                      //   style: TextStyle(color: Colors.white),
+                      // ),
+                      // SizedBox(width: 20),
+                      // SvgPicture.asset(
+                      //   "assets/icons/star.svg",
+                      //   color: Color(0xFFfe8904),
+                      // ),
+                      // SizedBox(width: 5),
+                      // Text(
+                      //   "4.8",
+                      //   style: TextStyle(color: Colors.white),
+                      // )
                     ],
                   ),
                   SizedBox(height: 20),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "FREE",
-                          style: kHeadingextStyle.copyWith(
-                              fontSize: 32, color: Colors.white),
-                        ),
-                        // TextSpan(
-                        //   text: "\$70",
-                        //   style: TextStyle(
-                        //     color: kTextColor.withOpacity(.5),
-                        //     decoration: TextDecoration.lineThrough,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
+                  // RichText(
+                  //   text: TextSpan(
+                  //     children: [
+                  //       TextSpan(
+                  //         text: "FREE",
+                  //         style: kHeadingextStyle.copyWith(
+                  //             fontSize: 32, color: Colors.white),
+                  //       ),
+                  //       // TextSpan(
+                  //       //   text: "\$70",
+                  //       //   style: TextStyle(
+                  //       //     color: kTextColor.withOpacity(.5),
+                  //       //     decoration: TextDecoration.lineThrough,
+                  //       //   ),
+                  //       // ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -141,13 +143,12 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
                                 indicatorWeight: 3.0,
                                 isScrollable: false,
                                 labelStyle: kSubtitleTextSyule,
-                                indicatorColor: kPinkColor,
+                                indicatorColor: AppColors.alternateShade3,
                                 controller: this._tabController,
                                 unselectedLabelColor: Colors.grey,
                                 labelColor: Colors.black87,
                                 tabs: <Widget>[
                                   new Tab(text: 'Playlist'),
-                                  new Tab(text: 'Review'),
                                   new Tab(text: 'Author'),
                                 ],
                               ),
@@ -211,7 +212,6 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
                                       ),
                                     ),
                                     Container(),
-                                    Container()
                                   ]),
                             )
                           ],
@@ -257,10 +257,10 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
                                 height: 56,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: kPinkColor,
+                                  color: AppColors.buttonShade1,
                                 ),
                                 child: Text(
-                                  "Enroll Now",
+                                  "Continue Watching",
                                   style: kSubtitleTextSyule.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -332,7 +332,7 @@ class CourseContent extends StatelessWidget {
           ),
           Spacer(),
           Expanded(
-                      child: Container(
+            child: Container(
               margin: EdgeInsets.only(left: 20),
               height: 40,
               width: 40,
