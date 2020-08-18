@@ -29,9 +29,9 @@ class CoursesView extends StatelessWidget {
                     1.0
                   ],
                       colors: [
-                    Color(0xFF3E3F62),
-                    Color(0xFF343555),
-                    Color(0xFFAE74EC)
+                    AppColors.backgroundShade1,
+                    AppColors.backgroundShade2,
+                    AppColors.backgroundShade3,
                   ])),
             ),
             Image.asset('assets/images/eclipse.png'),

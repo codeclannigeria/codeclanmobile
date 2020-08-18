@@ -22,167 +22,164 @@ class _DashboardViewState extends State<DashboardView> {
     var heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color(0XFFf4f5f9),
-      body: SingleChildScrollView(
-        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (BuildContext context, AuthenticationState state) {
-            if (state is AuthenticationSuccess) {
-              return Stack(
-                children: <Widget>[
-                  Container(
-                    height: heightOfScreen,
-                    width: widthOfScreen,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            end: Alignment.bottomCenter,
-                            begin: Alignment.topCenter,
-                            stops: [
-                          0,
-                          0.7,
-                          1.0
-                        ],
-                            colors: [
-                          Color(0xFF3E3F62),
-                          Color(0xFF343555),
-                          Color(0xFFAE74EC)
-                        ])),
-                  ),
-                  Image.asset('assets/images/eclipse.png'),
-                  SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          RichText(
-                            text: TextSpan(
-                                text: 'Hi ',
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        color: AppColors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 20)),
-                                children: <TextSpan>[
+      body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (BuildContext context, AuthenticationState state) {
+          if (state is AuthenticationSuccess) {
+            return Stack(
+              children: <Widget>[
+                Container(
+                  height: heightOfScreen,
+                  width: widthOfScreen,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          end: Alignment.bottomCenter,
+                          begin: Alignment.topCenter,
+                          stops: [
+                        0,
+                        0.7,
+                        1.0
+                      ],
+                          colors: [
+                        AppColors.backgroundShade1,
+                        AppColors.backgroundShade2,
+                        AppColors.backgroundShade3,
+                      ])),
+                ),
+                Image.asset('assets/images/eclipse.png'),
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        RichText(
+                          text: TextSpan(
+                              text: 'Hi ',
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 20)),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) => RegisterScreen()),
+                                        // );
+                                      },
+                                    text: '${state.user.firstName}',
+                                    style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                            color: Color(0xFFFF7698),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold)))
+                              ]),
+                        ),
+                        SpaceH40(),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                                child: menuCard(
+                                    Color(0xFFFF7698),
+                                    Colors.black87,
+                                    Feather.user,
+                                    'Assigned\nmentor',
+                                    'Get hands on coding help',
+                                    '1',
+                                    null)),
+                            SpaceW16(),
+                            Expanded(
+                                child: menuCard(
+                                    Color(0xFF038BF4),
+                                    Colors.black87,
+                                    Feather.file,
+                                    'Pending\ntasks',
+                                    'Move to the next stage',
+                                    '2',
+                                    null))
+                          ],
+                        ),
+                        SpaceH20(),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: menuCard(
+                                  Color(0xFF12CDFE),
+                                  Colors.black87,
+                                  Feather.trending_up,
+                                  'Current\nstage',
+                                  'See your progress',
+                                  null,
+                                  null),
+                            ),
+                            SpaceW16(),
+                            Expanded(
+                                child: menuCard(
+                                    AppColors.alternateShade3,
+                                    Colors.black87,
+                                    Feather.award,
+                                    'My\ntracks',
+                                    'Your enrolled tracks',
+                                    '${state.user.tracks.length}',
+                                    () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TrackListScreen()))))
+                          ],
+                        ),
+                        SpaceH40(),
+                        Center(
+                            child: Icon(SimpleLineIcons.exclamation,
+                                size: 35,
+                                color: AppColors.white.withOpacity(0.5))),
+                        SpaceH16(),
+                        Center(
+                          child: Text('Want to enroll to a track?',
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12))),
+                        ),
+                        SpaceH16(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                          child: CustomButton(
+                            title: RichText(
+                                text: TextSpan(
+                                    text: 'Enroll ',
+                                    children: <TextSpan>[
                                   TextSpan(
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) => RegisterScreen()),
-                                          // );
-                                        },
-                                      text: '${state.user.firstName}',
+                                      text: 'Now',
                                       style: GoogleFonts.poppins(
                                           textStyle: TextStyle(
-                                              color: Color(0xFFFF7698),
-                                              fontSize: 20,
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold)))
-                                ]),
-                          ),
-                          SpaceH40(),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                  child: menuCard(
-                                      Color(0xFFFF7698),
-                                      Colors.black87,
-                                      Feather.user,
-                                      'Assigned\nmentor',
-                                      'Get hands on coding help',
-                                      '1',
-                                      null)),
-                              SpaceW16(),
-                              Expanded(
-                                  child: menuCard(
-                                      Color(0xFF038BF4),
-                                      Colors.black87,
-                                      Feather.file,
-                                      'Pending\ntasks',
-                                      'Move to the next stage',
-                                      '2',
-                                      null))
-                            ],
-                          ),
-                          SpaceH20(),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: menuCard(
-                                    Color(0xFF12CDFE),
-                                    Colors.black87,
-                                    Feather.trending_up,
-                                    'Current\nstage',
-                                    'See your progress',
-                                    null,
-                                    null),
-                              ),
-                              SpaceW16(),
-                              Expanded(
-                                  child: menuCard(
-                                      Color(0xFFFE1952),
-                                      Colors.black87,
-                                      Feather.award,
-                                      'My\ntracks',
-                                      'Your enrolled tracks',
-                                      '${state.user.tracks.length}',
-                                      () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TrackListScreen()))))
-                            ],
-                          ),
-                          SpaceH40(),
-                          Center(
-                              child: Icon(SimpleLineIcons.exclamation,
-                                  size: 35,
-                                  color: AppColors.white.withOpacity(0.5))),
-                          SpaceH16(),
-                          Center(
-                            child: Text('Want to enroll to a track?',
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        color: AppColors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12))),
-                          ),
-                          SpaceH16(),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: CustomButton(
-                              title: RichText(
-                                  text: TextSpan(
-                                      text: 'Enroll ',
-                                      children: <TextSpan>[
-                                    TextSpan(
-                                        text: 'Now',
-                                        style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold)))
-                                  ])),
-                              borderRadius: 3,
-                              color: AppColors.blackShade1.withOpacity(0.5),
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TrackListScreen()),
-                              ),
-                              textStyle: GoogleFonts.poppins(
-                                  textStyle: TextStyle(color: Colors.white)),
+                                ])),
+                            borderRadius: 3,
+                            color: AppColors.buttonShade1.withOpacity(0.9),
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TrackListScreen()),
                             ),
+                            textStyle: GoogleFonts.poppins(
+                                textStyle: TextStyle(color: Colors.white)),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              );
-            }
-            return Container();
-          },
-        ),
+                ),
+              ],
+            );
+          }
+          return Container();
+        },
       ),
     );
   }
