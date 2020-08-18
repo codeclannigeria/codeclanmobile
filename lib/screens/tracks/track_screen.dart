@@ -74,6 +74,14 @@ class TrackListScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               fontSize: 18)),
                     ),
+                    Text(
+                      'Click on a track to enroll',
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w200,
+                              fontSize: 12)),
+                    ),
                     SpaceH20(),
                     BlocBuilder<TracksBloc, TracksState>(
                         builder: (BuildContext context, TracksState state) {

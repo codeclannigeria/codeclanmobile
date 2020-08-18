@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:codeclanmobile/common/custom_button.dart';
+import 'package:codeclanmobile/screens/tracks/mentor_selection.dart';
 import 'package:codeclanmobile/services/api/models/track_list_dto.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
@@ -26,51 +27,57 @@ class _TrackItemState extends State<TrackItem> {
   Widget build(BuildContext context) {
     var widthOfScreen = MediaQuery.of(context).size.width;
     var heightOfScreen = MediaQuery.of(context).size.height;
-    return Container(
-        padding: EdgeInsets.all(Sizes.PADDING_20),
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                blurRadius: 5.0, // soften the shadow
-                spreadRadius: 0.0, //extend the shadow
-                offset: Offset(
-                  0.0, // Move to right 10  horizontally
-                  2.0, // Move to bottom 10 Vertically
-                ),
-              )
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MentorSelectionScreen()),
+      ),
+      child: Container(
+          padding: EdgeInsets.all(Sizes.PADDING_20),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  blurRadius: 5.0, // soften the shadow
+                  spreadRadius: 0.0, //extend the shadow
+                  offset: Offset(
+                    0.0, // Move to right 10  horizontally
+                    2.0, // Move to bottom 10 Vertically
+                  ),
+                )
+              ],
+              borderRadius: BorderRadius.circular(12),
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/track-item-mask.png')),
+              gradient: LinearGradient(
+                  colors: gradientListColors[
+                      _random.nextInt(gradientListColors.length)])),
+          width: widthOfScreen,
+          height: heightOfScreen * 0.17,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/track-icon.png',
+                width: 30,
+                height: 30,
+              ),
+              SpaceH12(),
+              Text('${widget.item.title}',
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16))),
+              Text('${widget.item.description}',
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 10)))
             ],
-            borderRadius: BorderRadius.circular(12),
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/track-item-mask.png')),
-            gradient: LinearGradient(
-                colors: gradientListColors[
-                    _random.nextInt(gradientListColors.length)])),
-        width: widthOfScreen,
-        height: heightOfScreen * 0.17,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Image.asset(
-              'assets/images/track-icon.png',
-              width: 30,
-              height: 30,
-            ),
-            SpaceH12(),
-            Text('${widget.item.title}',
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16))),
-            Text('${widget.item.description}',
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w200,
-                        fontSize: 10)))
-          ],
-        ));
+          )),
+    );
   }
 }

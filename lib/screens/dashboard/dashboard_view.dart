@@ -73,7 +73,7 @@ class _DashboardViewState extends State<DashboardView> {
                                     text: '${state.user.firstName}',
                                     style: GoogleFonts.poppins(
                                         textStyle: TextStyle(
-                                            color: Color(0xFFFF7698),
+                                            color: AppColors.alternateShade3,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold)))
                               ]),
