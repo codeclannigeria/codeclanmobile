@@ -1,13 +1,17 @@
 part of values;
 
 class AppColors {
-  static const Color primaryColor = Color.fromARGB(255, 255, 255, 255);
-  static const Color secondaryColor = Color.fromARGB(255, 246, 247, 255);
+  static const Color primaryColor = Color(0xFFFF7698);
+  static const Color secondaryColor = Color(0xFFFE1952);
 
-  static const Color backgroundColor = Color(0xFFF4F3F8);
+  static const Color backgroundColor = Color(0xFF001229);
+
+  static const Color backgroundShade1 = Color(0xFF004495);
+  static const Color backgroundShade2 = Color(0xFF002352);
+  static const Color backgroundShade3 = Color(0xFF001229);
 
   static const Color pinkShade1 = Color(0xFFFF5252);
-  static const Color buttonShade1 = Color(0xFF1F59BB);
+  static const Color buttonShade1 = Color(0xFFF2A359);
   //Black
   static const Color black = Color(0xFF000000);
   static const Color blackShade1 = Color(0xFF3B3870);
@@ -25,4 +29,10 @@ class AppColors {
 
   //Green
   static const Color green = Color(0xFF3ACC6C);
+
+  //AlternateColors
+  static const Color alternateShade1 = Color(0xFFF2DC5D);
+  static const Color alternateShade2 = Color(0xFFF2A359);
+  static const Color alternateShade3 = Color(0xFFDB9065);
+  static const Color alternateShade4 = Color(0xFFA4031F);
 }

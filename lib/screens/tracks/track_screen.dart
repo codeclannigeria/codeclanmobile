@@ -43,9 +43,9 @@ class TrackListScreen extends StatelessWidget {
                     1.0
                   ],
                       colors: [
-                    Color(0xFF3E3F62),
-                    Color(0xFF343555),
-                    Color(0xFFAE74EC)
+                    AppColors.backgroundShade1,
+                    AppColors.backgroundShade2,
+                    AppColors.backgroundShade3,
                   ])),
             ),
             Image.asset('assets/images/eclipse.png'),
@@ -73,6 +73,14 @@ class TrackListScreen extends StatelessWidget {
                               color: AppColors.white,
                               fontWeight: FontWeight.w400,
                               fontSize: 18)),
+                    ),
+                    Text(
+                      'Click on a track to enroll',
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w200,
+                              fontSize: 12)),
                     ),
                     SpaceH20(),
                     BlocBuilder<TracksBloc, TracksState>(

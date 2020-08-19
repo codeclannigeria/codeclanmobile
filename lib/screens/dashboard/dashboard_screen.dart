@@ -1,3 +1,4 @@
+import 'package:codeclanmobile/screens/courses/courses_view.dart';
 import 'package:codeclanmobile/screens/dashboard/dashboard_view.dart';
 import 'package:codeclanmobile/screens/tasks/task_view.dart';
 import 'package:codeclanmobile/values/values.dart';
@@ -16,7 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<Widget> _children = [
     DashboardView(),
     TaskView(),
-    Container(),
+    CoursesView(),
     Container()
   ];
 
@@ -25,13 +26,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
       _currentIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
           selectedFontSize: 12,
           unselectedFontSize: 12,
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.backgroundColor,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: AppColors.buttonShade1,
           unselectedItemColor: Color(0xFF999999),
@@ -46,7 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               textStyle: GoogleFonts.poppins(
             textStyle: TextStyle(
                 fontSize: 12,
-                color: Color(0xFFE02E64),
+                color: AppColors.buttonShade1,
                 fontWeight: FontWeight.w500),
           )),
           currentIndex: _currentIndex,
@@ -79,7 +81,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             )
           ],
         ),
-       body:  _children[_currentIndex]
-    );
+        body: _children[_currentIndex]);
   }
 }

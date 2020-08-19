@@ -12,38 +12,61 @@ class TaskView extends StatelessWidget {
     var heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color(0XFFf4f5f9),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Tasks',
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        color: AppColors.blackShade1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25)),
-              ),
-              SpaceH30(),
-              // Column(
-              //   children: <Widget>[taskItem(heightOfScreen, widthOfScreen)],
-              // ),
-              Expanded(
-                child: ListView.separated(
-                    itemBuilder: (BuildContext context, int index) {
-                      return taskItem(
-                          heightOfScreen, widthOfScreen, index + 1, context);
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SpaceH16();
-                    },
-                    itemCount: 3),
-              )
-            ],
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: heightOfScreen,
+            width: widthOfScreen,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    end: Alignment.bottomCenter,
+                    begin: Alignment.topCenter,
+                    stops: [
+                  0,
+                  0.7,
+                  1.0
+                ],
+                    colors: [
+                  AppColors.backgroundShade1,
+                  AppColors.backgroundShade2,
+                  AppColors.backgroundShade3,
+                ])),
           ),
-        ),
+          Image.asset('assets/images/eclipse.png'),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Tasks',
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Color(0xFFFF7698),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25)),
+                  ),
+                  SpaceH30(),
+                  // Column(
+                  //   children: <Widget>[taskItem(heightOfScreen, widthOfScreen)],
+                  // ),
+                  Expanded(
+                    child: ListView.separated(
+                        itemBuilder: (BuildContext context, int index) {
+                          return taskItem(heightOfScreen, widthOfScreen,
+                              index + 1, context);
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SpaceH16();
+                        },
+                        itemCount: 3),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -133,7 +156,7 @@ Widget taskItem(
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
-                      color: Color(0xFFFF8875),
+                      color: Color(0xFFFF7698),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
