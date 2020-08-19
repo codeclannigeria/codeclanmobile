@@ -55,8 +55,8 @@ class ApiService implements IAPIService {
       Response response = await _dio.post(url,
           data: registerUserDto.toJson(),
           options: Options(headers: {"requireToken": false}));
-      RegisterUserResDto result = RegisterUserResDto.fromJson(response.data);
-      return result.canLogin;
+      // RegisterUserResDto result = RegisterUserResDto.fromJson(response.data);
+      return true;
     } on DioError catch (e) {
       if (e.response != null) {
         ApiException result = ApiException.fromJson(e.response.data);

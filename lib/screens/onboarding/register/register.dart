@@ -1,4 +1,5 @@
 import 'package:codeclanmobile/blocs/register_bloc.dart';
+import 'package:codeclanmobile/common/snack_bar.dart';
 import 'package:codeclanmobile/repositories/repositories.dart';
 import 'package:codeclanmobile/screens/onboarding/register/register_form.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +34,8 @@ class RegisterScreen extends StatelessWidget {
             child: BlocListener<RegisterBloc, RegisterState>(
               listener: (BuildContext context, RegisterState state) {
                 if (state is RegisterFailure) {
-                  Scaffold.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('${state.error}'),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
+                  CodeClanSnackBar.showSuccessSnackBar(context,
+                      message: state.error);
                 }
                 if (state is RegisterSuccess) {
                   Route route = MaterialPageRoute(
