@@ -30,7 +30,10 @@ class _TrackItemState extends State<TrackItem> {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MentorSelectionScreen()),
+        MaterialPageRoute(
+            builder: (context) => MentorSelectionScreen(
+                  item: widget.item,
+                )),
       ),
       child: Container(
           padding: EdgeInsets.all(Sizes.PADDING_20),
