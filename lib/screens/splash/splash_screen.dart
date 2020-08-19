@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: AppColors.buttonShade1,
         body: Center(
             child: Image.asset(
-          'assest/images/codeclan_white.png',
+          'asset/images/codeclan_white.png',
           width: 100,
           height: 100,
         )));
