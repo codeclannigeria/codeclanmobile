@@ -1,5 +1,6 @@
 import 'package:codeclanmobile/screens/courses/courses_view.dart';
 import 'package:codeclanmobile/screens/dashboard/dashboard_view.dart';
+import 'package:codeclanmobile/screens/profile/profile_view.dart';
 import 'package:codeclanmobile/screens/tasks/task_view.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     DashboardView(),
     TaskView(),
     CoursesView(),
+    ProfileView(),
     Container()
   ];
 
