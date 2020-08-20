@@ -16,23 +16,27 @@ class TrackMentorsDto {
     this.totalCount,
   });
 
-  final Items items;
-  final int totalCount;
+  List<Item> items;
+  int totalCount;
 
   factory TrackMentorsDto.fromJson(Map<String, dynamic> json) =>
       TrackMentorsDto(
-        items: json["items"] == null ? null : Items.fromJson(json["items"]),
+        items: json["items"] == null
+            ? null
+            : List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
         totalCount: json["totalCount"] == null ? null : json["totalCount"],
       );
 
   Map<String, dynamic> toJson() => {
-        "items": items == null ? null : items.toJson(),
+        "items": items == null
+            ? null
+            : List<dynamic>.from(items.map((x) => x.toJson())),
         "totalCount": totalCount == null ? null : totalCount,
       };
 }
 
-class Items {
-  Items({
+class Item {
+  Item({
     this.updatedAt,
     this.createdAt,
     this.role,
@@ -51,24 +55,24 @@ class Items {
     this.id,
   });
 
-  final DateTime updatedAt;
-  final DateTime createdAt;
-  final String role;
-  final String gender;
-  final DateTime dob;
-  final List<String> technologies;
-  final String photoUrl;
-  final List<dynamic> tracks;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String description;
-  final String city;
-  final String country;
-  final String phoneNumber;
-  final String id;
+  DateTime updatedAt;
+  DateTime createdAt;
+  String role;
+  String gender;
+  DateTime dob;
+  List<String> technologies;
+  String photoUrl;
+  List<dynamic> tracks;
+  String firstName;
+  String lastName;
+  String email;
+  String description;
+  String city;
+  String country;
+  String phoneNumber;
+  String id;
 
-  factory Items.fromJson(Map<String, dynamic> json) => Items(
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
         updatedAt: json["updatedAt"] == null
             ? null
             : DateTime.parse(json["updatedAt"]),

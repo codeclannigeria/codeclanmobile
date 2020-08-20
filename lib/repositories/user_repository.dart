@@ -1,5 +1,6 @@
 import 'package:codeclanmobile/models/register_user_dto.dart';
 import 'package:codeclanmobile/services/api/api_service.dart';
+import 'package:codeclanmobile/services/api/models/acct_verification_dto.dart';
 import 'package:codeclanmobile/services/api/models/user_dto.dart';
 import 'package:codeclanmobile/services/service_locator.dart';
 import 'package:codeclanmobile/services/storage/shared_pref_service.dart';
@@ -18,6 +19,12 @@ class UserRepository {
 
   Future<bool> register({@required RegisterUserDto registerUserDto}) async {
     final res = await apiService.register(registerUserDto);
+    return res;
+  }
+
+  Future<bool> sendVerificationEmail(
+      {@required AccountVerificationDto accountVerificationDto}) async {
+    final res = await apiService.sendVerificatonEmail(accountVerificationDto);
     return res;
   }
 

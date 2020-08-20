@@ -1,5 +1,6 @@
 import 'package:codeclanmobile/models/register_user_dto.dart';
 import 'package:codeclanmobile/repositories/repositories.dart';
+import 'package:codeclanmobile/services/api/models/acct_verification_dto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,15 +17,21 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     RegisterEvent event,
   ) async* {
     if (event is RegisterButtonPressed) {
+      AccountVerificationDto accountVerificationDto =
+          new AccountVerificationDto();
       EasyLoading.show(status: 'Creating your account...');
       yield RegisterLoading();
       try {
-        final res = await userRepository.register(
-            registerUserDto: event.registerUserDto);
-        if (res) {
-          EasyLoading.dismiss();
-          yield RegisterSuccess();
-        }
+        await userRepository.register(registerUserDto: event.registerUserDto);
+        accountVerificationDto.clientBaseUrl =
+            'https://codeclannigeria-frontend.now.sh/confirm-email';
+        accountVerificationDto.email = event.registerUserDto.email;
+        accountVerificationDto.tokenParamName = 'token';
+        accountVerificationDto.emailParamName = 'email';
+        userRepository.sendVerificationEmail(
+            accountVerificationDto: accountVerificationDto);
+        EasyLoading.dismiss();
+        yield RegisterSuccess();
       } catch (e) {
         EasyLoading.dismiss();
         yield RegisterFailure(error: e.toString());

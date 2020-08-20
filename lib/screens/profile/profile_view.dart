@@ -1,18 +1,9 @@
+import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/custom_button.dart';
 import '../../utils/spaces.dart';
-import '../../utils/spaces.dart';
-import '../../utils/spaces.dart';
-import '../../utils/spaces.dart';
-import '../../utils/spaces.dart';
-import '../../utils/spaces.dart';
-import '../../values/values.dart';
-import '../../values/values.dart';
-import '../../values/values.dart';
-import '../../values/values.dart';
-import '../../values/values.dart';
 
 class ProfileView extends StatelessWidget {
   @override

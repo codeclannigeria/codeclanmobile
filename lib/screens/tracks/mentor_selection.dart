@@ -1,4 +1,5 @@
 import 'package:codeclanmobile/blocs/track_bloc.dart';
+import 'package:codeclanmobile/common/custom_button.dart';
 import 'package:codeclanmobile/common/snack_bar.dart';
 import 'package:codeclanmobile/services/api/models/track_list_dto.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
@@ -7,6 +8,7 @@ import 'package:codeclanmobile/widgets/mentor_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MentorSelectionScreen extends StatefulWidget {
@@ -99,18 +101,103 @@ class _MentorSelectionScreenState extends State<MentorSelectionScreen> {
                           return Container(
                             height: heightOfScreen,
                             width: widthOfScreen,
-                            child: ListView.separated(
-                              physics: ClampingScrollPhysics(),
-                              padding: EdgeInsets.only(top: 0),
-                              itemBuilder: (BuildContext context, int index) {
-                                return MentorItem();
-                              },
-                              itemCount: state.tracksMentorsDto.totalCount,
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return SpaceH16();
-                              },
-                            ),
+                            child: state.tracksMentorsDto.items.length > 0
+                                ? ListView.separated(
+                                    physics: ClampingScrollPhysics(),
+                                    padding: EdgeInsets.only(top: 0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return MentorItem();
+                                    },
+                                    itemCount:
+                                        state.tracksMentorsDto.totalCount,
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return SpaceH16();
+                                    },
+                                  )
+                                : Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, right: 20.0, top: 40),
+                                    height: heightOfScreen,
+                                    width: widthOfScreen,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        SvgPicture.asset(
+                                          "assets/images/error_image.svg",
+                                          width: 300,
+                                          height: 300,
+                                        ),
+                                        SpaceH30(),
+                                        RichText(
+                                            textAlign: TextAlign.center,
+                                            text: TextSpan(
+                                                text:
+                                                    'Oops!\nIt seems there is no mentor for this track yet.',
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text:
+                                                          '\nPlease try again later',
+                                                      style: GoogleFonts.poppins(
+                                                          textStyle: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)))
+                                                ])),
+                                        Padding(
+                                          padding: const EdgeInsets.all(60.0),
+                                          child: CustomButton(
+                                            title: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                Icon(
+                                                  Feather.arrow_left,
+                                                  color: AppColors.buttonShade1,
+                                                ),
+                                                SpaceW12(),
+                                                RichText(
+                                                    text: TextSpan(
+                                                        text: 'Go ',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                          color: AppColors
+                                                              .buttonShade1,
+                                                        )),
+                                                        children: <TextSpan>[
+                                                      TextSpan(
+                                                          text: 'Back',
+                                                          style: GoogleFonts.poppins(
+                                                              textStyle: TextStyle(
+                                                                  color: AppColors
+                                                                      .buttonShade1,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)))
+                                                    ])),
+                                              ],
+                                            ),
+                                            borderRadius: 3,
+                                            color: Colors.white,
+                                            onPressed: () =>
+                                                Navigator.of(context).pop(),
+                                            textStyle: GoogleFonts.poppins(
+                                                textStyle: TextStyle(
+                                                    color: AppColors
+                                                        .buttonShade1)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                           );
                         }
                         return Container(

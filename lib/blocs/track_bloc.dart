@@ -1,4 +1,5 @@
 import 'package:codeclanmobile/repositories/track_repository.dart';
+import 'package:codeclanmobile/services/api/models/mentor_input.dart';
 import 'package:codeclanmobile/services/api/models/track_list_dto.dart';
 import 'package:codeclanmobile/services/api/models/track_mentors_dto.dart';
 import 'package:equatable/equatable.dart';
@@ -41,6 +42,13 @@ class FetchTrackMentorsLoaded extends TracksState {
   List<Object> get props => [tracksMentorsDto];
 }
 
+// Enroll To  Track State
+class EnrollToTrackSuccess extends TracksState {}
+
+class EnrollToTrackFailure extends TracksState {}
+
+class EnrollToTrackLoading extends TracksState {}
+
 // Define Tracks Event
 abstract class TracksEvent extends Equatable {
   const TracksEvent();
@@ -54,6 +62,13 @@ class FetchTrackMentors extends TracksEvent {
   final String trackId;
 
   FetchTrackMentors({@required this.trackId});
+}
+
+class EnrollToTrack extends TracksEvent {
+  final String trackId;
+  final MentorInput mentorInput;
+
+  EnrollToTrack({@required this.trackId, @required this.mentorInput});
 }
 
 // Define Bloc
@@ -80,6 +95,15 @@ class TracksBloc extends Bloc<TracksEvent, TracksState> {
         yield FetchTrackMentorsLoaded(tracksMentorsDto: mentorsList);
       } catch (e) {
         yield FetchTrackMentorsError();
+      }
+    }
+    if (event is EnrollToTrack) {
+      yield EnrollToTrackLoading();
+      try {
+        await _trackRepository.enrollToTrack(event.mentorInput, event.trackId);
+        yield EnrollToTrackSuccess();
+      } catch (e) {
+        yield EnrollToTrackFailure();
       }
     }
   }
