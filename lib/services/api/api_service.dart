@@ -149,7 +149,7 @@ class ApiService implements IAPIService {
   Future<bool> enrollToTrack(MentorInput input, String trackId) async {
     final url = '/tracks/$trackId/enroll';
     try {
-      Response response = await _dio.get(url);
+      Response response = await _dio.post(url, data: input.toJson());
       // TrackMentorsDto result = TrackMentorsDto.fromJson(response.data);
       return true;
     } on DioError catch (e) {
