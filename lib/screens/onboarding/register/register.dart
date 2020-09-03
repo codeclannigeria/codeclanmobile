@@ -34,7 +34,7 @@ class RegisterScreen extends StatelessWidget {
             child: BlocListener<RegisterBloc, RegisterState>(
               listener: (BuildContext context, RegisterState state) {
                 if (state is RegisterFailure) {
-                  CodeClanSnackBar.showSuccessSnackBar(context,
+                  CodeClanSnackBar.showErrorSnackBar(context,
                       message: state.error);
                 }
                 if (state is RegisterSuccess) {

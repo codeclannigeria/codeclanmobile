@@ -24,7 +24,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       try {
         await userRepository.register(registerUserDto: event.registerUserDto);
         accountVerificationDto.clientBaseUrl =
-            'https://codeclannigeria-frontend.now.sh/confirm-email';
+            'https://www.codeclannigeria.dev/confirm-email';
         accountVerificationDto.email = event.registerUserDto.email;
         accountVerificationDto.tokenParamName = 'token';
         accountVerificationDto.emailParamName = 'email';
