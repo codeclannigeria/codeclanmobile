@@ -1,5 +1,6 @@
 import 'package:codeclanmobile/screens/courses/courses_view.dart';
 import 'package:codeclanmobile/screens/dashboard/dashboard_view.dart';
+import 'package:codeclanmobile/screens/podcast/podcast_view.dart';
 import 'package:codeclanmobile/screens/profile/profile_view.dart';
 import 'package:codeclanmobile/screens/tasks/task_view.dart';
 import 'package:codeclanmobile/values/values.dart';
@@ -18,9 +19,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<Widget> _children = [
     DashboardView(),
     TaskView(),
-    CoursesView(),
+    PodcastView(),
     ProfileView(),
-    Container()
   ];
 
   void _onBottomNavBarTab(int index) {
@@ -67,10 +67,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               title: Text('Tasks'),
             ),
             BottomNavigationBarItem(
-              activeIcon: Icon(Feather.airplay, color: AppColors.buttonShade1),
-              icon: Icon(Feather.airplay, color: Color(0xFF999999)),
+              activeIcon: Icon(Feather.mic, color: AppColors.buttonShade1),
+              icon: Icon(Feather.mic, color: Color(0xFF999999)),
               title: Text(
-                'Courses',
+                'Podcast',
               ),
             ),
             BottomNavigationBarItem(

@@ -98,7 +98,7 @@ class _DashboardViewState extends State<DashboardView> {
                                     Feather.file,
                                     'Pending\ntasks',
                                     'Move to the next stage',
-                                    '2',
+                                    null,
                                     null))
                           ],
                         ),
@@ -122,13 +122,9 @@ class _DashboardViewState extends State<DashboardView> {
                                     Colors.black87,
                                     Feather.award,
                                     'My\ntracks',
-                                    'Your enrolled tracks',
+                                    'Your enrolled track',
                                     '${state.user.tracks.length}',
-                                    () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                TrackListScreen()))))
+                                    () {}))
                           ],
                         ),
                         SpaceH40(),

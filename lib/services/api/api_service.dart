@@ -5,6 +5,7 @@ import 'package:codeclanmobile/services/api/models/acct_verification_dto.dart';
 import 'package:codeclanmobile/services/api/models/api_exception.dart';
 import 'package:codeclanmobile/services/api/models/login_res_dto.dart';
 import 'package:codeclanmobile/services/api/models/mentor_input.dart';
+import 'package:codeclanmobile/services/api/models/task_dto.dart';
 import 'package:codeclanmobile/services/api/models/track_list_dto.dart';
 import 'package:codeclanmobile/services/api/models/track_mentors_dto.dart';
 import 'package:codeclanmobile/services/api/models/user_dto.dart';
@@ -152,6 +153,24 @@ class ApiService implements IAPIService {
       Response response = await _dio.post(url, data: input.toJson());
       // TrackMentorsDto result = TrackMentorsDto.fromJson(response.data);
       return true;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        ApiException result = ApiException.fromJson(e.response.data);
+        throw result.message;
+      } else {
+        print(e.error);
+        throw e.error;
+      }
+    }
+  }
+
+  @override
+  Future<Task> getTasks() async {
+    final url = '/tasks';
+    try {
+      Response response = await _dio.get(url);
+      Task result = Task.fromJson(response.data);
+      return result;
     } on DioError catch (e) {
       if (e.response != null) {
         ApiException result = ApiException.fromJson(e.response.data);
