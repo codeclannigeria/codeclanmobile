@@ -3,7 +3,6 @@ import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -44,11 +43,11 @@ class TrackEnrollSuccessView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SvgPicture.asset(
-                  "assets/images/high_five.svg",
-                  width: 300,
-                  height: 300,
-                ),
+                // SvgPicture.asset(
+                //   "assets/images/high_five.svg",
+                //   width: 300,
+                //   height: 300,
+                // ),
                 SpaceH30(),
                 RichText(
                     textAlign: TextAlign.center,

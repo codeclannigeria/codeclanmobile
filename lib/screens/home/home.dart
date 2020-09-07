@@ -2,7 +2,6 @@ import 'package:codeclanmobile/constants/constants.dart';
 import 'package:codeclanmobile/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -16,7 +15,7 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                SvgPicture.asset("assets/icons/menu.svg"),
+                // SvgPicture.asset("assets/icons/menu.svg"),
                 Image.asset("assets/images/user.png"),
               ],
             ),
@@ -34,7 +33,7 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  SvgPicture.asset("assets/icons/search.svg"),
+                  // SvgPicture.asset("assets/icons/search.svg"),
                   SizedBox(width: 16),
                   Text(
                     "Search for anything",

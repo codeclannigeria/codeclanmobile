@@ -2,7 +2,6 @@ import 'package:codeclanmobile/constants/constants.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CourseDetailsScreen extends StatefulWidget {
   @override

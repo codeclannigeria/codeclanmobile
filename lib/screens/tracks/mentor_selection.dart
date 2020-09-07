@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'track_enroll_success.dart';
@@ -151,11 +150,11 @@ class _MentorSelectionScreenState extends State<MentorSelectionScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: <Widget>[
-                                        SvgPicture.asset(
-                                          "assets/images/error_image.svg",
-                                          width: 300,
-                                          height: 300,
-                                        ),
+                                        // SvgPicture.asset(
+                                        //   "assets/images/error_image.svg",
+                                        //   width: 300,
+                                        //   height: 300,
+                                        // ),
                                         SpaceH30(),
                                         RichText(
                                             textAlign: TextAlign.center,
@@ -239,11 +238,11 @@ class _MentorSelectionScreenState extends State<MentorSelectionScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: <Widget>[
-                                        SvgPicture.asset(
-                                          "assets/images/error_image.svg",
-                                          width: 300,
-                                          height: 300,
-                                        ),
+                                        // SvgPicture.asset(
+                                        //   "assets/images/error_image.svg",
+                                        //   width: 300,
+                                        //   height: 300,
+                                        // ),
                                         SpaceH30(),
                                         RichText(
                                             textAlign: TextAlign.center,
