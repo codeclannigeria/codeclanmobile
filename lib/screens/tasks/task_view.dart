@@ -6,9 +6,16 @@ import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:html_unescape/html_unescape.dart';
 
-class TaskView extends StatelessWidget {
+class TaskView extends StatefulWidget {
+  @override
+  _TaskViewState createState() => _TaskViewState();
+}
+
+class _TaskViewState extends State<TaskView> {
   @override
   Widget build(BuildContext context) {
     var widthOfScreen = MediaQuery.of(context).size.width;
@@ -52,7 +59,7 @@ class TaskView extends StatelessWidget {
                             'Tasks',
                             style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
-                                    color: Color(0xFFFF7698),
+                                    color: AppColors.alternateShade3,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25)),
                           ),
@@ -97,6 +104,7 @@ class TaskView extends StatelessWidget {
 
 Widget taskItem(
     heightOfScreen, widthOfScreen, Item task, BuildContext context) {
+  var unescape = new HtmlUnescape();
   return Container(
     margin: const EdgeInsets.only(bottom: 6.0),
     height: heightOfScreen * 0.30,
@@ -135,23 +143,27 @@ Widget taskItem(
                     fontSize: 10)),
           ),
           SpaceH8(),
-          Text(
-            '${task.description}',
-            textAlign: TextAlign.left,
-            softWrap: true,
-            maxLines: 5,
-            overflow: TextOverflow.fade,
-            style: GoogleFonts.poppins(
+          HtmlWidget(
+            '${unescape.convert(task.description).substring(0, 200)}...',
+            textStyle: GoogleFonts.poppins(
                 textStyle: TextStyle(
                     color: Color(0xFF666666),
                     fontWeight: FontWeight.w300,
                     fontSize: 12)),
           ),
-          SpaceH16(),
-          Divider(
-            color: Color(0xFF666666).withOpacity(0.5),
-          ),
-          SpaceH8(),
+          // Text(
+          //   '${unescape.convert(task.description)}',
+          //   textAlign: TextAlign.left,
+          //   softWrap: true,
+          //   maxLines: 5,
+          //   overflow: TextOverflow.fade,
+          //   style: GoogleFonts.poppins(
+          //       textStyle: TextStyle(
+          //           color: Color(0xFF666666),
+          //           fontWeight: FontWeight.w300,
+          //           fontSize: 12)),
+          // ),
+          Spacer(),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,7 +177,7 @@ Widget taskItem(
                     ),
                     SpaceW8(),
                     Text(
-                      '${task.createdAt}',
+                      '${task.stage}',
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               color: Color(0xFF666666).withOpacity(0.5),
@@ -182,17 +194,17 @@ Widget taskItem(
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
-                      color: Color(0xFFFF7698),
+                      color: AppColors.alternateShade3,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Submit task',
+                        'Show Task',
                         style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 12)),
+                                fontSize: 14)),
                       ),
                     ),
                   ),
