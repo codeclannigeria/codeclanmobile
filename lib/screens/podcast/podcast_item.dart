@@ -16,6 +16,7 @@ class PodcastItem extends StatelessWidget {
       elevation: 0,
       color: AppColors.backgroundShade3.withOpacity(0.3),
       child: ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 10),
         onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
@@ -24,6 +25,7 @@ class PodcastItem extends StatelessWidget {
                     ))),
         leading: Container(
           width: 60,
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               gradient: LinearGradient(
@@ -44,15 +46,25 @@ class PodcastItem extends StatelessWidget {
             style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                     color: AppColors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400))),
-        title: Text(
-            '${timeUntil(episode.publicationDate)} - ${episode.duration.toString().substring(2, 7)}',
-            style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                    color: AppColors.alternateShade3,
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w300))),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('${timeUntil(episode.publicationDate)}',
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: AppColors.alternateShade3,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300))),
+            Text('${episode.duration.toString().substring(2, 7)} mins',
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: AppColors.whiteShade1,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300))),
+          ],
+        ),
         trailing: Icon(
           Feather.chevron_right,
           color: AppColors.alternateShade2,

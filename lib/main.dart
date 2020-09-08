@@ -4,7 +4,6 @@ import 'package:codeclanmobile/screens/onboarding/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:audio_session/audio_session.dart';
 
 import 'blocs/blocs.dart';
 import 'common/loading_indicator.dart';
@@ -34,7 +33,6 @@ class SimpleBlocObserver extends BlocObserver {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   setupLocator();
   await StorageUtil.getInstance();
   Bloc.observer = SimpleBlocObserver();

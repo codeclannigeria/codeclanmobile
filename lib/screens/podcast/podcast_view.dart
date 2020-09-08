@@ -81,18 +81,52 @@ class _PodcastViewState extends State<PodcastView> {
                                   )
                                 : state is PodcastLoaded
                                     ? Expanded(
-                                        child: ListView.separated(
-                                            itemBuilder: (_, index) {
-                                              return PodcastItem(
-                                                episode: state
-                                                    .podcast.episodes[index],
-                                              );
-                                            },
-                                            separatorBuilder: (_, __) {
-                                              return SpaceH4();
-                                            },
-                                            itemCount:
-                                                state.podcast.episodes.length))
+                                        child: Container(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  '${state.podcast.description}',
+                                                  overflow: TextOverflow.fade,
+                                                  maxLines: 3,
+                                                  style: GoogleFonts.poppins(
+                                                      textStyle: TextStyle(
+                                                          color:
+                                                              AppColors.white,
+                                                          fontSize: 12,
+                                                          fontWeight: FontWeight
+                                                              .w300))),
+                                              SpaceH30(),
+                                              Text(
+                                                  '${state.podcast.episodes.length} Episodes',
+                                                  overflow: TextOverflow.fade,
+                                                  maxLines: 3,
+                                                  style: GoogleFonts.poppins(
+                                                      textStyle: TextStyle(
+                                                          color:
+                                                              AppColors.white,
+                                                          fontSize: 15,
+                                                          fontWeight: FontWeight
+                                                              .w400))),
+                                              Expanded(
+                                                  child: ListView.separated(
+                                                      itemBuilder: (_, index) {
+                                                        return PodcastItem(
+                                                          episode: state.podcast
+                                                              .episodes[index],
+                                                        );
+                                                      },
+                                                      separatorBuilder:
+                                                          (_, __) {
+                                                        return SpaceH4();
+                                                      },
+                                                      itemCount: state.podcast
+                                                          .episodes.length)),
+                                            ],
+                                          ),
+                                        ),
+                                      )
                                     : Container()
                           ],
                         ),

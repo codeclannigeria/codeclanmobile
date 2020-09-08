@@ -50,6 +50,20 @@ class _SeekBarState extends State<SeekBar> {
           },
         ),
         Positioned(
+          left: 16.0,
+          bottom: 0.0,
+          child: Text(
+              RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
+                      .firstMatch("$_listenedTo")
+                      ?.group(1) ??
+                  '$_listenedTo',
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400))),
+        ),
+        Positioned(
           right: 16.0,
           bottom: 0.0,
           child: Text(
@@ -67,5 +81,6 @@ class _SeekBarState extends State<SeekBar> {
     );
   }
 
+  Duration get _listenedTo => widget.position;
   Duration get _remaining => widget.duration - widget.position;
 }
