@@ -1,17 +1,27 @@
 import 'package:codeclanmobile/common/custom_button.dart';
 import 'package:codeclanmobile/common/custom_text_form_field.dart';
+import 'package:codeclanmobile/main.dart';
 import 'package:codeclanmobile/screens/tasks/task_success_view.dart';
+import 'package:codeclanmobile/services/api/models/task_dto.dart';
 import 'package:codeclanmobile/utils/spaces.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:html_unescape/html_unescape.dart';
+import 'package:simple_html_css/simple_html_css.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubmitTaskView extends StatelessWidget {
+  final Item task;
+
+  const SubmitTaskView({Key key, @required this.task}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var widthOfScreen = MediaQuery.of(context).size.width;
     var heightOfScreen = MediaQuery.of(context).size.height;
+    var unescape = new HtmlUnescape();
     return Scaffold(
         // backgroundColor: Color(0XFFf4f5f9),
         // appBar: AppBar(
@@ -47,19 +57,23 @@ class SubmitTaskView extends StatelessWidget {
         Image.asset('assets/images/eclipse.png'),
         SafeArea(
           child: Container(
+              padding: EdgeInsets.only(top: 20),
               height: heightOfScreen,
               width: widthOfScreen,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
                   children: <Widget>[
-                    InkWell(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: Icon(
-                        FlutterIcons.arrow_left_sli,
-                        color: Colors.white,
-                      ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () => Navigator.of(context).pop(),
+                          child: Icon(
+                            FlutterIcons.arrow_left_sli,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                     SpaceH12(),
                     Text(
@@ -71,22 +85,40 @@ class SubmitTaskView extends StatelessWidget {
                               fontSize: 18)),
                     ),
                     SpaceH20(),
-                    Text(
-                      'Task 1',
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: AppColors.primaryColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15)),
-                    ),
-                    Text(
-                      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution',
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 12)),
+                    // HtmlWidget(
+                    //   '${unescape.convert(task.description)}...',
+                    //   onTapUrl: (url) => print('tapped $url'),
+                    //   customStylesBuilder: (element) {
+                    //     if (element.localName == 'h1') {
+                    //       return {'color': 'red'};
+                    //     }
+                    //     return null;
+                    //   },
+                    //   textStyle: GoogleFonts.poppins(
+                    //       textStyle: TextStyle(
+                    //           color: AppColors.white,
+                    //           fontWeight: FontWeight.w300,
+                    //           fontSize: 12)),
+                    // ),
+                    Builder(
+                      builder: (BuildContext context) {
+                        return RichText(
+                          text: HTML.toTextSpan(
+                              context, '${unescape.convert(task.description)}',
+                              defaultTextStyle: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 13)), linksCallback: (link) {
+                            // You can now use the url_launcher library to open the link.
+                            // Or you can handle the link in your app itself. This gives you
+                            // complete control over your links.
+                            // For now, let's just print it
+                            _launchUniversalLinkIos(link);
+                            print(link);
+                          }),
+                        );
+                      },
                     ),
                     SpaceH30(),
                     CustomTextFormField(
@@ -174,11 +206,28 @@ class SubmitTaskView extends StatelessWidget {
                       textStyle: GoogleFonts.poppins(
                           textStyle: TextStyle(color: Colors.white)),
                     ),
+                    SpaceH30(),
                   ],
                 ),
               )),
         ),
       ],
     ));
+  }
+
+  Future<void> _launchUniversalLinkIos(String url) async {
+    if (await canLaunch(url)) {
+      final bool nativeAppLaunchSucceeded = await launch(
+        url,
+        forceSafariVC: false,
+        universalLinksOnly: true,
+      );
+      if (!nativeAppLaunchSucceeded) {
+        await launch(
+          url,
+          forceSafariVC: true,
+        );
+      }
+    }
   }
 }

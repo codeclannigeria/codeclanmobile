@@ -189,7 +189,10 @@ Widget taskItem(
                 GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SubmitTaskView()),
+                    MaterialPageRoute(
+                        builder: (context) => SubmitTaskView(
+                              task: task,
+                            )),
                   ),
                   child: Container(
                     decoration: BoxDecoration(
@@ -199,7 +202,7 @@ Widget taskItem(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Show Task',
+                        'See Details',
                         style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                                 color: Colors.white,
