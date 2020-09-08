@@ -39,6 +39,7 @@ dependencies:
   just_audio: ^0.4.1
   audio_service: ^0.14.1
   flutter_media_notification: ^1.2.6
+  audio_session: ^0.0.5
 
 
 

@@ -6,6 +6,8 @@ PODS:
   - Flutter (1.0.0)
   - flutter_isolate (0.0.1):
     - Flutter
+  - flutter_media_notification (0.0.1):
+    - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -32,6 +34,7 @@ DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - Flutter (from `Flutter`)
   - flutter_isolate (from `.symlinks/plugins/flutter_isolate/ios`)
+  - flutter_media_notification (from `.symlinks/plugins/flutter_media_notification/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_linux (from `.symlinks/plugins/path_provider_linux/ios`)
@@ -54,6 +57,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_isolate:
     :path: ".symlinks/plugins/flutter_isolate/ios"
+  flutter_media_notification:
+    :path: ".symlinks/plugins/flutter_media_notification/ios"
   just_audio:
     :path: ".symlinks/plugins/just_audio/ios"
   path_provider:
@@ -76,6 +81,7 @@ SPEC CHECKSUMS:
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_isolate: 0edf5081826d071adf21759d1eb10ff5c24503b5
+  flutter_media_notification: b950606ee6c7bc8b1fbecd8ad0f0b5c6f884d781
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c

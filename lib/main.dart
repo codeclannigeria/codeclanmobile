@@ -34,9 +34,7 @@ class SimpleBlocObserver extends BlocObserver {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // AudioSession.instance.then((session) {
-  //   session.configure(AudioSessionConfiguration.music());
-  // });
+
   setupLocator();
   await StorageUtil.getInstance();
   Bloc.observer = SimpleBlocObserver();

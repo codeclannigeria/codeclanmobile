@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:audio_service/audio_service.dart';
+import 'package:audio_session/audio_session.dart';
 import 'package:codeclanmobile/screens/podcast/bloc/podcast_bloc.dart';
 import 'package:codeclanmobile/screens/podcast/seek_bar.dart';
 import 'package:codeclanmobile/services/audio/podcast_background_service.dart';
@@ -21,27 +24,44 @@ class PodcastPlayerView extends StatefulWidget {
 }
 
 class _PodcastPlayerViewState extends State<PodcastPlayerView> {
-  AudioPlayer audioPlayer = AudioPlayer();
+  AudioPlayer audioPlayer;
   bool isPlaying = false;
   String status = 'hidden';
   Duration position = Duration.zero;
   @override
   void initState() {
-    audioPlayer.setUrl(widget.episode.contentUrl);
     super.initState();
+    audioPlayer = AudioPlayer();
+    _init();
     MediaNotification.setListener('pause', () {
-      setState(() => status = 'pause');
+      audioPlayer.pause();
     });
 
     MediaNotification.setListener('play', () {
-      setState(() => status = 'play');
+      audioPlayer.play();
     });
 
-    MediaNotification.setListener('next', () {});
+    MediaNotification.setListener('next', () {
+      audioPlayer.seek(Duration(seconds: audioPlayer.position.inSeconds + 10));
+    });
 
-    MediaNotification.setListener('prev', () {});
+    MediaNotification.setListener('prev', () {
+      audioPlayer.seek(Duration(seconds: audioPlayer.position.inSeconds - 10));
+    });
+  }
 
-    MediaNotification.setListener('select', () {});
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
+  _init() async {
+    AudioSession.instance.then((audioSession) async {
+      await audioSession.configure(AudioSessionConfiguration.speech());
+      _handleInterruptions(audioSession);
+      await audioPlayer.setUrl(widget.episode.contentUrl);
+    });
   }
 
   @override
@@ -100,26 +120,44 @@ class _PodcastPlayerViewState extends State<PodcastPlayerView> {
                   ),
                   SpaceH12(),
                   SpaceH30(),
-                  Container(
-                    width: widthOfScreen,
-                    height: heightOfScreen * 0.3,
-                    child: Center(
-                      child: Icon(
-                        Feather.headphones,
-                        color: AppColors.blackShade1,
-                        size: 60,
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        gradient: LinearGradient(
-                            end: Alignment.bottomCenter,
-                            begin: Alignment.topCenter,
-                            colors: [
-                              AppColors.alternateShade1,
-                              AppColors.alternateShade3
-                            ])),
-                  ),
+                  StreamBuilder<PlayerState>(
+                      stream: audioPlayer.playerStateStream,
+                      builder: (context, snapshot) {
+                        final processingState =
+                            snapshot.data?.processingState ??
+                                AudioProcessingState.stopped;
+                        return Container(
+                          width: widthOfScreen,
+                          height: heightOfScreen * 0.3,
+                          child: Center(
+                            child:
+                                (processingState == ProcessingState.loading ||
+                                        processingState ==
+                                            ProcessingState.buffering)
+                                    ? Text('Fetching Podcast...',
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400)))
+                                    : Icon(
+                                        Feather.headphones,
+                                        color: AppColors.blackShade1,
+                                        size: 60,
+                                      ),
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              gradient: LinearGradient(
+                                  end: Alignment.bottomCenter,
+                                  begin: Alignment.topCenter,
+                                  colors: [
+                                    AppColors.alternateShade1,
+                                    AppColors.alternateShade3
+                                  ])),
+                        );
+                      }),
                   SpaceH30(),
                   Center(
                     child: Text('${widget.episode.title}',
@@ -166,6 +204,9 @@ class _PodcastPlayerViewState extends State<PodcastPlayerView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 IconButton(
+                                  onPressed: () => audioPlayer.seek(Duration(
+                                      seconds:
+                                          audioPlayer.position.inSeconds - 10)),
                                   icon: Icon(
                                     Feather.skip_back,
                                     color: AppColors.greyShade1,
@@ -199,7 +240,8 @@ class _PodcastPlayerViewState extends State<PodcastPlayerView> {
                                 ),
                                 IconButton(
                                   onPressed: () => audioPlayer.seek(Duration(
-                                      seconds: position.inSeconds + 10)),
+                                      seconds:
+                                          audioPlayer.position.inSeconds + 10)),
                                   icon: Icon(
                                     Feather.skip_forward,
                                     color: AppColors.greyShade1,
@@ -245,19 +287,80 @@ class _PodcastPlayerViewState extends State<PodcastPlayerView> {
 
   play() async {
     audioPlayer.play();
+    setState(() => status = 'play');
     MediaNotification.showNotification(
         title: widget.episode.title,
         isPlaying: true,
         author: 'Episode ${widget.episode.episode}');
+    //  AudioService.start(
+    //         backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
+    //         androidNotificationChannelName: 'Audio Service Demo',
+    //         // Enable this if you want the Android service to exit the foreground state on pause.
+    //         //androidStopForegroundOnPause: true,
+    //         androidNotificationColor: 0xFF2196f3,
+    //         androidNotificationIcon: 'mipmap/ic_launcher',
+    //         androidEnableQueue: true,
+    //       );
   }
 
   pause() {
     audioPlayer.pause();
-    MediaNotification.showNotification(
-        title: widget.episode.title,
-        author: 'Episode ${widget.episode.episode}',
-        isPlaying: false);
+    setState(() => status = 'pause');
   }
 
   stop() => audioPlayer.stop();
+  void _handleInterruptions(AudioSession audioSession) {
+    bool playInterrupted = false;
+    audioSession.becomingNoisyEventStream.listen((_) {
+      pause();
+    });
+    audioPlayer.playingStream.listen((playing) {
+      playInterrupted = false;
+      // Temporary as the just_audio 0.3.4 doesn't activate the audio session.
+      if (playing) {
+        audioSession.setActive(true);
+      }
+    });
+    audioSession.interruptionEventStream.listen((event) {
+      if (event.begin) {
+        switch (event.type) {
+          case AudioInterruptionType.duck:
+            if (audioSession.androidAudioAttributes.usage ==
+                AndroidAudioUsage.game) {
+              audioPlayer.setVolume(audioPlayer.volume / 2);
+            }
+            playInterrupted = false;
+            break;
+          case AudioInterruptionType.pause:
+          case AudioInterruptionType.unknown:
+            if (audioPlayer.playing) {
+              pause();
+              // Although pause is async and sets playInterrupted = false,
+              // this is done in the sync portion.
+              playInterrupted = true;
+            }
+            break;
+        }
+      } else {
+        switch (event.type) {
+          case AudioInterruptionType.duck:
+            audioPlayer.setVolume(min(1.0, audioPlayer.volume * 2));
+            playInterrupted = false;
+            break;
+          case AudioInterruptionType.pause:
+            if (playInterrupted) play();
+            playInterrupted = false;
+            break;
+          case AudioInterruptionType.unknown:
+            playInterrupted = false;
+            break;
+        }
+      }
+    });
+  }
+
+  void _audioPlayerTaskEntrypoint() async {
+    AudioServiceBackground.run(
+        () => PodcastBackgroundTask(url: widget.episode.contentUrl));
+  }
 }
