@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundShade2,
         body: BlocProvider(
             create: (context) {
               return LoginBloc(
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontWeight: FontWeight.w500)),
                           Text('Sign in to your Code Clan account.',
                               style: GoogleFonts.poppins(
-                                  color: Colors.black87,
+                                  color: AppColors.whiteShade1,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w300)),
                           SizedBox(
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   text: 'Don\`t have an account? ',
                                   style: GoogleFonts.poppins(
                                       textStyle: TextStyle(
-                                          color: Color(0xFF666666),
+                                          color: AppColors.white,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12)),
                                   children: <TextSpan>[

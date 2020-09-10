@@ -153,7 +153,7 @@ class _LoginFormState extends State<LoginForm> {
                                   fontWeight: FontWeight.bold)))
                     ])),
               borderRadius: 3,
-              color: Colors.black87,
+              color: AppColors.buttonShade1,
               onPressed:
                   state is! LoginInProgress ? _onLoginButtonPressed : null,
               textStyle: GoogleFonts.poppins(

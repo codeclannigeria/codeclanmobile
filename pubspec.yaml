@@ -45,6 +45,7 @@ dependencies:
   flutter_widget_from_html_core: ^0.5.0+3
   simple_html_css: ^2.0.0+2
   url_launcher: ^5.5.2
+  sliding_up_panel: ^1.0.2
 
 
 

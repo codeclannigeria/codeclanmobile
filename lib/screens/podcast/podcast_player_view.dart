@@ -15,11 +15,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:podcast_search/podcast_search.dart';
 import 'package:move_to_background/move_to_background.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class PodcastPlayerView extends StatefulWidget {
   final Episode episode;
+  final PanelController pc;
 
-  const PodcastPlayerView({Key key, @required this.episode}) : super(key: key);
+  const PodcastPlayerView({Key key, @required this.episode, this.pc})
+      : super(key: key);
   @override
   _PodcastPlayerViewState createState() => _PodcastPlayerViewState();
 }

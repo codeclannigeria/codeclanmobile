@@ -1,15 +1,20 @@
+import 'package:codeclanmobile/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:codeclanmobile/screens/podcast/podcast_player_view.dart';
 import 'package:codeclanmobile/values/values.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:podcast_search/podcast_search.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class PodcastItem extends StatelessWidget {
   final Episode episode;
+  final PanelController pc;
 
-  const PodcastItem({Key key, @required this.episode}) : super(key: key);
+  const PodcastItem({Key key, @required this.episode, this.pc})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -17,12 +22,16 @@ class PodcastItem extends StatelessWidget {
       color: AppColors.backgroundShade3.withOpacity(0.3),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 10),
-        onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PodcastPlayerView(
-                      episode: episode,
-                    ))),
+        onTap: () {
+          BlocProvider.of<DashboardBloc>(context)
+              .add(OpenPodcastPlayer(episode: episode));
+          // return Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => PodcastPlayerView(
+          //             episode: episode,
+          //           )));
+        },
         leading: Container(
           width: 60,
           height: MediaQuery.of(context).size.height,
