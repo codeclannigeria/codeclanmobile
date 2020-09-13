@@ -16,3 +16,5 @@ class PodcastPlayerOpened extends DashboardState {
   @override
   List<Object> get props => [episode];
 }
+
+class PodcastPlayerMinimized extends DashboardState {}

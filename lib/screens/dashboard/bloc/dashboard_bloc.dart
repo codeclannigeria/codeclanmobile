@@ -18,5 +18,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     if (event is OpenPodcastPlayer) {
       yield PodcastPlayerOpened(event.episode);
     }
+    if (event is MinimizePodcastPlayer) {
+      yield PodcastPlayerMinimized();
+    }
   }
 }

@@ -46,6 +46,7 @@ dependencies:
   simple_html_css: ^2.0.0+2
   url_launcher: ^5.5.2
   sliding_up_panel: ^1.0.2
+  timeline_tile: ^0.1.2
 
 
 

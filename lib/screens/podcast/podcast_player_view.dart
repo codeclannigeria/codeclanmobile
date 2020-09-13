@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:codeclanmobile/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:codeclanmobile/screens/podcast/bloc/podcast_bloc.dart';
 import 'package:codeclanmobile/screens/podcast/seek_bar.dart';
 import 'package:codeclanmobile/services/audio/podcast_background_service.dart';
@@ -100,226 +101,220 @@ class _PodcastPlayerViewState extends State<PodcastPlayerView>
   Widget build(BuildContext context) {
     var widthOfScreen = MediaQuery.of(context).size.width;
     var heightOfScreen = MediaQuery.of(context).size.height;
-    return WillPopScope(
-      onWillPop: () async {
-        await MoveToBackground.moveTaskToBack();
-        return false;
-      },
-      child: Scaffold(
-          body: BlocProvider(
-        create: (context) => PodcastBloc(),
-        child: Stack(
-          children: <Widget>[
-            //Container for header
-            Container(
-              height: heightOfScreen,
-              width: widthOfScreen,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      end: Alignment.bottomCenter,
-                      begin: Alignment.topCenter,
-                      stops: [
-                    0,
-                    0.7,
-                    1.0
-                  ],
-                      colors: [
-                    AppColors.backgroundShade1,
-                    AppColors.backgroundShade2,
-                    AppColors.backgroundShade3,
-                  ])),
-            ),
-            //Container for playlist header
-            BlocConsumer<PodcastBloc, PodcastState>(
-                listener: (context, state) {},
-                builder: (context, state) {
-                  return SafeArea(
-                      child: Container(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: Icon(
-                            FlutterIcons.arrow_left_sli,
-                            color: Colors.white,
-                          ),
+    return Scaffold(
+        body: BlocProvider(
+      create: (context) => PodcastBloc(),
+      child: Stack(
+        children: <Widget>[
+          //Container for header
+          Container(
+            height: heightOfScreen,
+            width: widthOfScreen,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    end: Alignment.bottomCenter,
+                    begin: Alignment.topCenter,
+                    stops: [
+                  0,
+                  0.7,
+                  1.0
+                ],
+                    colors: [
+                  AppColors.backgroundShade1,
+                  AppColors.backgroundShade2,
+                  AppColors.backgroundShade3,
+                ])),
+          ),
+          //Container for playlist header
+          BlocConsumer<PodcastBloc, PodcastState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                return SafeArea(
+                    child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () => BlocProvider.of<DashboardBloc>(context)
+                            .add(MinimizePodcastPlayer()),
+                        child: Icon(
+                          FlutterIcons.arrow_down_sli,
+                          color: Colors.white,
                         ),
-                        SpaceH12(),
-                        SpaceH30(),
-                        StreamBuilder<PlayerState>(
-                            stream: audioPlayer.playerStateStream,
-                            builder: (context, snapshot) {
-                              final processingState =
-                                  snapshot.data?.processingState ??
-                                      AudioProcessingState.stopped;
-                              return Container(
-                                width: widthOfScreen,
-                                height: heightOfScreen * 0.3,
-                                child: Center(
-                                  child: (processingState ==
-                                              ProcessingState.loading ||
-                                          processingState ==
-                                              ProcessingState.buffering)
-                                      ? Text('Fetching Podcast...',
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.poppins(
-                                              textStyle: TextStyle(
-                                                  color: AppColors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400)))
-                                      : Icon(
-                                          Feather.headphones,
-                                          color: AppColors.blackShade1,
-                                          size: 60,
-                                        ),
-                                ),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    gradient: LinearGradient(
-                                        end: Alignment.bottomCenter,
-                                        begin: Alignment.topCenter,
-                                        colors: [
-                                          AppColors.alternateShade1,
-                                          AppColors.alternateShade3
-                                        ])),
-                              );
-                            }),
-                        SpaceH30(),
-                        Center(
-                          child: Text('${widget.episode.title}',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      color: AppColors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400))),
-                        ),
-                        Center(
-                          child: Text('Episode ${widget.episode.episode}',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      color: AppColors.alternateShade3,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400))),
-                        ),
-                        SpaceH30(),
-                        //       //Container for audio player
-                        Center(
-                          child: Container(
-                            width: 300,
-                            height: 80,
-                            padding: EdgeInsets.only(left: 16, right: 16),
-                            decoration: BoxDecoration(
-                                color:
-                                    AppColors.backgroundShade3.withOpacity(0.2),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: AppColors.backgroundShade1,
-                                      blurRadius: 10.0,
-                                      spreadRadius: 0.1)
-                                ]),
-                            child: StreamBuilder<PlayerState>(
-                                stream: audioPlayer.playerStateStream,
-                                builder: (context, snapshot) {
-                                  final playing =
-                                      snapshot.data?.playing ?? false;
-                                  final processingState =
-                                      snapshot.data?.processingState ??
-                                          AudioProcessingState.stopped;
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      IconButton(
-                                        onPressed: () => audioPlayer.seek(
-                                            Duration(
-                                                seconds: audioPlayer
-                                                        .position.inSeconds -
-                                                    10)),
-                                        icon: Icon(
-                                          Feather.skip_back,
-                                          color: AppColors.greyShade1,
-                                          size: 30,
-                                        ),
-                                      ),
-                                      playing
-                                          ? IconButton(
-                                              onPressed: () => pause(),
-                                              icon: Icon(
-                                                Feather.pause,
-                                                color: AppColors.greyShade1,
-                                                size: 30,
-                                              ),
-                                            )
-                                          : IconButton(
-                                              onPressed: () => play(),
-                                              icon: Icon(
-                                                Feather.play,
-                                                color: AppColors.greyShade1,
-                                                size: 30,
-                                              ),
-                                            ),
-                                      IconButton(
-                                        onPressed: () => stop(),
-                                        icon: Icon(
-                                          Feather.stop_circle,
-                                          color: AppColors.greyShade1,
-                                          size: 30,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () => audioPlayer.seek(
-                                            Duration(
-                                                seconds: audioPlayer
-                                                        .position.inSeconds +
-                                                    10)),
-                                        icon: Icon(
-                                          Feather.skip_forward,
-                                          color: AppColors.greyShade1,
-                                          size: 30,
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                }),
-                          ),
-                        ),
-                        SpaceH30(),
-                        StreamBuilder<Duration>(
-                          stream: audioPlayer.durationStream,
+                      ),
+                      SpaceH12(),
+                      SpaceH30(),
+                      StreamBuilder<PlayerState>(
+                          stream: audioPlayer.playerStateStream,
                           builder: (context, snapshot) {
-                            final duration = snapshot.data ?? Duration.zero;
-                            return StreamBuilder<Duration>(
-                              stream: audioPlayer.positionStream,
-                              builder: (context, snapshot) {
-                                var position = snapshot.data ?? Duration.zero;
-                                if (position > duration) {
-                                  position = duration;
-                                }
-                                return SeekBar(
-                                  duration: duration,
-                                  position: position,
-                                  onChangeEnd: (newPosition) {
-                                    audioPlayer.seek(newPosition);
-                                  },
-                                );
-                              },
+                            final processingState =
+                                snapshot.data?.processingState ??
+                                    AudioProcessingState.stopped;
+                            return Container(
+                              width: widthOfScreen,
+                              height: heightOfScreen * 0.3,
+                              child: Center(
+                                child: (processingState ==
+                                            ProcessingState.loading ||
+                                        processingState ==
+                                            ProcessingState.buffering)
+                                    ? Text('Fetching Podcast...',
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400)))
+                                    : Icon(
+                                        Feather.headphones,
+                                        color: AppColors.blackShade1,
+                                        size: 60,
+                                      ),
+                              ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  gradient: LinearGradient(
+                                      end: Alignment.bottomCenter,
+                                      begin: Alignment.topCenter,
+                                      colors: [
+                                        AppColors.alternateShade1,
+                                        AppColors.alternateShade3
+                                      ])),
                             );
-                          },
+                          }),
+                      SpaceH30(),
+                      Center(
+                        child: Text('${widget.episode.title}',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400))),
+                      ),
+                      Center(
+                        child: Text('Episode ${widget.episode.episode}',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: AppColors.alternateShade3,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400))),
+                      ),
+                      SpaceH30(),
+                      //       //Container for audio player
+                      Center(
+                        child: Container(
+                          width: 300,
+                          height: 80,
+                          padding: EdgeInsets.only(left: 16, right: 16),
+                          decoration: BoxDecoration(
+                              color:
+                                  AppColors.backgroundShade3.withOpacity(0.2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: AppColors.backgroundShade1,
+                                    blurRadius: 10.0,
+                                    spreadRadius: 0.1)
+                              ]),
+                          child: StreamBuilder<PlayerState>(
+                              stream: audioPlayer.playerStateStream,
+                              builder: (context, snapshot) {
+                                final playing = snapshot.data?.playing ?? false;
+                                final processingState =
+                                    snapshot.data?.processingState ??
+                                        AudioProcessingState.stopped;
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    IconButton(
+                                      onPressed: () => audioPlayer.seek(
+                                          Duration(
+                                              seconds: audioPlayer
+                                                      .position.inSeconds -
+                                                  10)),
+                                      icon: Icon(
+                                        Feather.skip_back,
+                                        color: AppColors.greyShade1,
+                                        size: 30,
+                                      ),
+                                    ),
+                                    playing
+                                        ? IconButton(
+                                            onPressed: () => pause(),
+                                            icon: Icon(
+                                              Feather.pause,
+                                              color: AppColors.greyShade1,
+                                              size: 30,
+                                            ),
+                                          )
+                                        : IconButton(
+                                            onPressed: () => play(),
+                                            icon: Icon(
+                                              Feather.play,
+                                              color: AppColors.greyShade1,
+                                              size: 30,
+                                            ),
+                                          ),
+                                    IconButton(
+                                      onPressed: () => stop(),
+                                      icon: Icon(
+                                        Feather.stop_circle,
+                                        color: AppColors.greyShade1,
+                                        size: 30,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () => audioPlayer.seek(
+                                          Duration(
+                                              seconds: audioPlayer
+                                                      .position.inSeconds +
+                                                  10)),
+                                      icon: Icon(
+                                        Feather.skip_forward,
+                                        color: AppColors.greyShade1,
+                                        size: 30,
+                                      ),
+                                    )
+                                  ],
+                                );
+                              }),
                         ),
-                      ],
-                    ),
-                  ));
-                })
-          ],
-        ),
-      )),
-    );
+                      ),
+                      SpaceH30(),
+                      StreamBuilder<Duration>(
+                        stream: audioPlayer.durationStream,
+                        builder: (context, snapshot) {
+                          final duration = snapshot.data ?? Duration.zero;
+                          return StreamBuilder<Duration>(
+                            stream: audioPlayer.positionStream,
+                            builder: (context, snapshot) {
+                              var position = snapshot.data ?? Duration.zero;
+                              if (position > duration) {
+                                position = duration;
+                              }
+                              return SeekBar(
+                                duration: duration,
+                                position: position,
+                                onChangeEnd: (newPosition) {
+                                  audioPlayer.seek(newPosition);
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ));
+              })
+        ],
+      ),
+    ));
   }
 
   play() async {

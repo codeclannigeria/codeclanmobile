@@ -12,3 +12,5 @@ class OpenPodcastPlayer extends DashboardEvent {
 
   OpenPodcastPlayer({@required this.episode});
 }
+
+class MinimizePodcastPlayer extends DashboardEvent {}

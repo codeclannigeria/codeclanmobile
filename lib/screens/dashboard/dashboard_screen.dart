@@ -20,6 +20,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   PanelController _pc = new PanelController();
   int _currentIndex = 0;
+  double minHeight = 0;
 
   final List<Widget> _children = [
     DashboardView(),
@@ -92,8 +93,77 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           body: SlidingUpPanel(
               controller: _pc,
+              minHeight: minHeight,
+              maxHeight: MediaQuery.of(context).size.height,
+              collapsed: Container(
+                  color: AppColors.buttonShade1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 60,
+                          height: MediaQuery.of(context).size.height,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              gradient: LinearGradient(
+                                  end: Alignment.bottomCenter,
+                                  begin: Alignment.topCenter,
+                                  colors: [
+                                    AppColors.alternateShade1,
+                                    AppColors.alternateShade3
+                                  ])),
+                          child: Center(
+                            child: Icon(Feather.headphones),
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('The book of commons',
+                                overflow: TextOverflow.fade,
+                                maxLines: 3,
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w300))),
+                            Text('Episode 2',
+                                overflow: TextOverflow.fade,
+                                maxLines: 3,
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w300))),
+                          ],
+                        ),
+                        Icon(
+                          Feather.play,
+                          color: AppColors.white,
+                        )
+                      ],
+                    ),
+                  )),
               panel: BlocConsumer<DashboardBloc, DashboardState>(
-                listener: (context, state) {},
+                listener: (context, state) {
+                  if (state is PodcastPlayerOpened) {
+                    print("Podcast Open");
+                    _pc.isPanelOpen ? _pc.show() : _pc.open();
+                    return PodcastPlayerView(
+                      episode: state.episode,
+                      pc: _pc,
+                    );
+                  }
+                  if (state is PodcastPlayerMinimized) {
+                    setState(() {
+                      minHeight = MediaQuery.of(context).size.height * 0.08;
+                    });
+                    _pc.close();
+                  }
+                },
                 builder: (context, state) {
                   if (state is PodcastPlayerOpened) {
                     return PodcastPlayerView(
